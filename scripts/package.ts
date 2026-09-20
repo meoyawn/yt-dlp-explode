@@ -23,12 +23,15 @@ export async function packageExecutable(rid: string, root = resolve(import.meta.
     const directory = join(temporary, name);
     await $`mkdir -p ${directory}`;
     await cp(binary, join(directory, binaryName), { preserveTimestamps: true });
-    for (const filename of ["README.md", "COMPATIBILITY.md", "LICENSE", "licenses"]) {
+    for (const filename of ["README.md", "COMPATIBILITY.md", "LICENSE"]) {
       await cp(join(root, filename), join(directory, filename), {
-        recursive: true,
         preserveTimestamps: true,
       });
     }
+    await $`mkdir -p ${join(directory, "licenses")}`;
+    await cp(join(root, "external", "YoutubeExplode", "License.txt"), join(directory, "licenses", "YoutubeExplode.txt"), {
+      preserveTimestamps: true,
+    });
     const hash = new Bun.CryptoHasher("sha256").update(await Bun.file(binary).arrayBuffer()).digest("hex");
     await Bun.write(join(directory, "SHA256SUMS"), `${hash}  ${binaryName}\n`);
     if (rid.startsWith("win-")) {
