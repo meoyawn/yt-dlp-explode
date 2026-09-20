@@ -1,0 +1,3 @@
+[submodule "external/YoutubeExplode"]
+	path = external/YoutubeExplode
+	url = https://github.com/meoyawn/YoutubeExplode.git

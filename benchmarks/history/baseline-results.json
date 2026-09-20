@@ -1,0 +1,349 @@
+{
+  "date_utc": "2026-09-20T14:12:53.933745+00:00",
+  "platform": "macOS-26.4-arm64-arm-64bit",
+  "video_url": "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+  "language": "en",
+  "cookie_copy_supplied": true,
+  "script": "/Users/meoyawn/agent/scripts/transcribe.ts",
+  "script_sha256": "88450aaa235c3407dd8fd5d51e14c5f98bf7e3c9d990bba15287ac6d11940cd8",
+  "yt_dlp_version": "2026.07.04",
+  "node_version": "v26.9.0",
+  "binary_bytes": 7625600,
+  "binary_sha256": "36dd5780c0821a2c217dcc10c8193bdf9553f74f425ecc73f994f9ffc94afe3d",
+  "runs": [
+    {
+      "tool": "aot-anonymous",
+      "iteration": 0,
+      "warmup": true,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/script-comparison/00-aot-anonymous/transcript.txt",
+        "en"
+      ],
+      "returncode": 1,
+      "wall_s": 2.414098,
+      "success": false,
+      "error": "process exited 1"
+    },
+    {
+      "tool": "yt-dlp-script",
+      "iteration": 0,
+      "warmup": true,
+      "command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "returncode": 0,
+      "wall_s": 14.849367417,
+      "success": true,
+      "bytes": 13397,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a"
+    },
+    {
+      "tool": "aot-cookies",
+      "iteration": 0,
+      "warmup": true,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/script-comparison/00-aot-cookies/transcript.txt",
+        "en",
+        "<temporary-directory>/cookies.txt"
+      ],
+      "returncode": 1,
+      "wall_s": 1.564994875,
+      "success": false,
+      "error": "process exited 1"
+    },
+    {
+      "tool": "yt-dlp-script",
+      "iteration": 1,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "returncode": 0,
+      "wall_s": 17.920654,
+      "success": true,
+      "bytes": 13397,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a"
+    },
+    {
+      "tool": "aot-cookies",
+      "iteration": 1,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/script-comparison/01-aot-cookies/transcript.txt",
+        "en",
+        "<temporary-directory>/cookies.txt"
+      ],
+      "returncode": 1,
+      "wall_s": 1.4963962080000002,
+      "success": false,
+      "error": "process exited 1"
+    },
+    {
+      "tool": "aot-anonymous",
+      "iteration": 1,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/script-comparison/01-aot-anonymous/transcript.txt",
+        "en"
+      ],
+      "returncode": 1,
+      "wall_s": 1.544564292000004,
+      "success": false,
+      "error": "process exited 1"
+    },
+    {
+      "tool": "aot-cookies",
+      "iteration": 2,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/script-comparison/02-aot-cookies/transcript.txt",
+        "en",
+        "<temporary-directory>/cookies.txt"
+      ],
+      "returncode": 1,
+      "wall_s": 1.4132633749999997,
+      "success": false,
+      "error": "process exited 1"
+    },
+    {
+      "tool": "aot-anonymous",
+      "iteration": 2,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/script-comparison/02-aot-anonymous/transcript.txt",
+        "en"
+      ],
+      "returncode": 1,
+      "wall_s": 1.4288747089999987,
+      "success": false,
+      "error": "process exited 1"
+    },
+    {
+      "tool": "yt-dlp-script",
+      "iteration": 2,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "returncode": 0,
+      "wall_s": 21.201007250000004,
+      "success": true,
+      "bytes": 13397,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a"
+    },
+    {
+      "tool": "aot-anonymous",
+      "iteration": 3,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/script-comparison/03-aot-anonymous/transcript.txt",
+        "en"
+      ],
+      "returncode": 1,
+      "wall_s": 1.4652204169999976,
+      "success": false,
+      "error": "process exited 1"
+    },
+    {
+      "tool": "yt-dlp-script",
+      "iteration": 3,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "returncode": 0,
+      "wall_s": 16.509930624999996,
+      "success": true,
+      "bytes": 13397,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a"
+    },
+    {
+      "tool": "aot-cookies",
+      "iteration": 3,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/script-comparison/03-aot-cookies/transcript.txt",
+        "en",
+        "<temporary-directory>/cookies.txt"
+      ],
+      "returncode": 1,
+      "wall_s": 1.3660936670000012,
+      "success": false,
+      "error": "process exited 1"
+    },
+    {
+      "tool": "yt-dlp-script",
+      "iteration": 4,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "returncode": 0,
+      "wall_s": 16.75713937500001,
+      "success": true,
+      "bytes": 13397,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a"
+    },
+    {
+      "tool": "aot-cookies",
+      "iteration": 4,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/script-comparison/04-aot-cookies/transcript.txt",
+        "en",
+        "<temporary-directory>/cookies.txt"
+      ],
+      "returncode": 0,
+      "wall_s": 1.9295500420000167,
+      "success": true,
+      "bytes": 11007,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "stages": {
+        "video_id": "4Ff0xc9M8kA",
+        "language": "en",
+        "cookies_used": true,
+        "auto_generated": true,
+        "captions": 151,
+        "manifest_ms": 1703.1796,
+        "captions_ms": 190.45890000000009,
+        "total_ms": 1894.2207
+      }
+    },
+    {
+      "tool": "aot-anonymous",
+      "iteration": 4,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/script-comparison/04-aot-anonymous/transcript.txt",
+        "en"
+      ],
+      "returncode": 1,
+      "wall_s": 2.8223632079999845,
+      "success": false,
+      "error": "process exited 1"
+    },
+    {
+      "tool": "aot-cookies",
+      "iteration": 5,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/script-comparison/05-aot-cookies/transcript.txt",
+        "en",
+        "<temporary-directory>/cookies.txt"
+      ],
+      "returncode": 1,
+      "wall_s": 6.252519250000006,
+      "success": false,
+      "error": "process exited 1"
+    },
+    {
+      "tool": "aot-anonymous",
+      "iteration": 5,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/script-comparison/05-aot-anonymous/transcript.txt",
+        "en"
+      ],
+      "returncode": 1,
+      "wall_s": 1.4408914579999816,
+      "success": false,
+      "error": "process exited 1"
+    },
+    {
+      "tool": "yt-dlp-script",
+      "iteration": 5,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "returncode": 0,
+      "wall_s": 20.63959220800001,
+      "success": true,
+      "bytes": 13397,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a"
+    }
+  ],
+  "summary": {
+    "aot-anonymous": {
+      "successes": 0,
+      "attempts": 5,
+      "median_attempt_wall_s": 1.4652204169999976
+    },
+    "yt-dlp-script": {
+      "successes": 5,
+      "attempts": 5,
+      "median_attempt_wall_s": 17.920654,
+      "median_success_wall_s": 17.920654,
+      "min_success_wall_s": 16.509930624999996,
+      "max_success_wall_s": 21.201007250000004
+    },
+    "aot-cookies": {
+      "successes": 1,
+      "attempts": 5,
+      "median_attempt_wall_s": 1.4963962080000002,
+      "median_success_wall_s": 1.9295500420000167,
+      "min_success_wall_s": 1.9295500420000167,
+      "max_success_wall_s": 1.9295500420000167
+    }
+  },
+  "comparisons": {
+    "aot-anonymous": {
+      "matching_transcripts": null,
+      "speed_ratio": null
+    },
+    "aot-cookies": {
+      "matching_transcripts": true,
+      "yt_dlp_over_aot_median_wall_ratio": 9.287478225454514
+    }
+  }
+}

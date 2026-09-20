@@ -1,0 +1,362 @@
+{
+  "date_utc": "2026-09-20T14:55:28.176775+00:00",
+  "platform": "macOS-26.4-arm64-arm-64bit",
+  "video_url": "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+  "language": "en",
+  "cookie_copy_supplied": true,
+  "script": "/Users/meoyawn/agent/scripts/transcribe.ts",
+  "script_sha256": "88450aaa235c3407dd8fd5d51e14c5f98bf7e3c9d990bba15287ac6d11940cd8",
+  "yt_dlp_version": "2026.07.04",
+  "node_version": "v26.9.0",
+  "binary_bytes": 9165232,
+  "binary_sha256": "ac84fcaf9f45cc4f7e4a5de115465838930d6a71cef55cd4c53b86e55ca9b86b",
+  "memory_measurement": "macOS /usr/bin/time -l maximum resident set size (bytes); not summed process-tree memory",
+  "runs": [
+    {
+      "tool": "aot-cookies",
+      "iteration": 0,
+      "warmup": true,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/YoutubeExplode.Cli/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "--output",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/personal-cli/00-aot-cookies/transcript.txt",
+        "--language",
+        "en",
+        "--stats",
+        "--cookies",
+        "<temporary-directory>/cookies.txt"
+      ],
+      "returncode": 0,
+      "wall_s": 2.2778945840000002,
+      "peak_rss_bytes": 36978688,
+      "success": true,
+      "bytes": 11007,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "stages": {
+        "video_id": "4Ff0xc9M8kA",
+        "language": "en",
+        "cookies_used": true,
+        "auto_generated": true,
+        "captions": 595,
+        "http_requests": 4,
+        "manifest_ms": 2059.8395,
+        "captions_ms": 199.18949999999995,
+        "total_ms": 2260.2196
+      }
+    },
+    {
+      "tool": "yt-dlp-script",
+      "iteration": 0,
+      "warmup": true,
+      "command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "returncode": 0,
+      "wall_s": 15.511822541999997,
+      "peak_rss_bytes": 354615296,
+      "success": true,
+      "bytes": 13397,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a"
+    },
+    {
+      "tool": "yt-dlp-script",
+      "iteration": 1,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "returncode": 0,
+      "wall_s": 16.331881334000002,
+      "peak_rss_bytes": 343162880,
+      "success": true,
+      "bytes": 13397,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a"
+    },
+    {
+      "tool": "aot-cookies",
+      "iteration": 1,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/YoutubeExplode.Cli/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "--output",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/personal-cli/01-aot-cookies/transcript.txt",
+        "--language",
+        "en",
+        "--stats",
+        "--cookies",
+        "<temporary-directory>/cookies.txt"
+      ],
+      "returncode": 0,
+      "wall_s": 2.149311124999997,
+      "peak_rss_bytes": 35438592,
+      "success": true,
+      "bytes": 11007,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "stages": {
+        "video_id": "4Ff0xc9M8kA",
+        "language": "en",
+        "cookies_used": true,
+        "auto_generated": true,
+        "captions": 595,
+        "http_requests": 4,
+        "manifest_ms": 1917.3787,
+        "captions_ms": 194.10799999999995,
+        "total_ms": 2111.973
+      }
+    },
+    {
+      "tool": "aot-cookies",
+      "iteration": 2,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/YoutubeExplode.Cli/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "--output",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/personal-cli/02-aot-cookies/transcript.txt",
+        "--language",
+        "en",
+        "--stats",
+        "--cookies",
+        "<temporary-directory>/cookies.txt"
+      ],
+      "returncode": 0,
+      "wall_s": 2.2759937910000048,
+      "peak_rss_bytes": 35979264,
+      "success": true,
+      "bytes": 11007,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "stages": {
+        "video_id": "4Ff0xc9M8kA",
+        "language": "en",
+        "cookies_used": true,
+        "auto_generated": true,
+        "captions": 595,
+        "http_requests": 4,
+        "manifest_ms": 2042.7308,
+        "captions_ms": 206.10940000000005,
+        "total_ms": 2249.5257
+      }
+    },
+    {
+      "tool": "yt-dlp-script",
+      "iteration": 2,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "returncode": 0,
+      "wall_s": 13.898571374999996,
+      "peak_rss_bytes": 339640320,
+      "success": true,
+      "bytes": 13397,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a"
+    },
+    {
+      "tool": "yt-dlp-script",
+      "iteration": 3,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "returncode": 0,
+      "wall_s": 11.136285666999996,
+      "peak_rss_bytes": 354484224,
+      "success": true,
+      "bytes": 13397,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a"
+    },
+    {
+      "tool": "aot-cookies",
+      "iteration": 3,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/YoutubeExplode.Cli/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "--output",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/personal-cli/03-aot-cookies/transcript.txt",
+        "--language",
+        "en",
+        "--stats",
+        "--cookies",
+        "<temporary-directory>/cookies.txt"
+      ],
+      "returncode": 0,
+      "wall_s": 7.1597378749999905,
+      "peak_rss_bytes": 36388864,
+      "success": true,
+      "bytes": 11007,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "stages": {
+        "video_id": "4Ff0xc9M8kA",
+        "language": "en",
+        "cookies_used": true,
+        "auto_generated": true,
+        "captions": 595,
+        "http_requests": 4,
+        "manifest_ms": 6927.5356,
+        "captions_ms": 187.28110000000015,
+        "total_ms": 7115.6213
+      }
+    },
+    {
+      "tool": "aot-cookies",
+      "iteration": 4,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/YoutubeExplode.Cli/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "--output",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/personal-cli/04-aot-cookies/transcript.txt",
+        "--language",
+        "en",
+        "--stats",
+        "--cookies",
+        "<temporary-directory>/cookies.txt"
+      ],
+      "returncode": 0,
+      "wall_s": 5.641225874999989,
+      "peak_rss_bytes": 35766272,
+      "success": true,
+      "bytes": 11007,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "stages": {
+        "video_id": "4Ff0xc9M8kA",
+        "language": "en",
+        "cookies_used": true,
+        "auto_generated": true,
+        "captions": 595,
+        "http_requests": 4,
+        "manifest_ms": 5423.9002,
+        "captions_ms": 186.08470000000034,
+        "total_ms": 5610.9584
+      }
+    },
+    {
+      "tool": "yt-dlp-script",
+      "iteration": 4,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "returncode": 0,
+      "wall_s": 18.98077645800001,
+      "peak_rss_bytes": 354451456,
+      "success": true,
+      "bytes": 13397,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a"
+    },
+    {
+      "tool": "yt-dlp-script",
+      "iteration": 5,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "returncode": 0,
+      "wall_s": 17.759435542000006,
+      "peak_rss_bytes": 356401152,
+      "success": true,
+      "bytes": 13397,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a"
+    },
+    {
+      "tool": "aot-cookies",
+      "iteration": 5,
+      "warmup": false,
+      "command": [
+        "/Users/meoyawn/Developer/github/YoutubeExplode/YoutubeExplode.Cli/bin/native/youtube-transcript",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+        "--output",
+        "/Users/meoyawn/Developer/github/YoutubeExplode/benchmarks/TranscriptAot/bin/results/personal-cli/05-aot-cookies/transcript.txt",
+        "--language",
+        "en",
+        "--stats",
+        "--cookies",
+        "<temporary-directory>/cookies.txt"
+      ],
+      "returncode": 0,
+      "wall_s": 2.0987280829999975,
+      "peak_rss_bytes": 36028416,
+      "success": true,
+      "bytes": 11007,
+      "words": 2009,
+      "lines": 300,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "stages": {
+        "video_id": "4Ff0xc9M8kA",
+        "language": "en",
+        "cookies_used": true,
+        "auto_generated": true,
+        "captions": 595,
+        "http_requests": 4,
+        "manifest_ms": 1894.6421,
+        "captions_ms": 184.32349999999997,
+        "total_ms": 2079.5489
+      }
+    }
+  ],
+  "summary": {
+    "aot-cookies": {
+      "successes": 5,
+      "attempts": 5,
+      "median_attempt_wall_s": 2.2759937910000048,
+      "median_success_wall_s": 2.2759937910000048,
+      "min_success_wall_s": 2.0987280829999975,
+      "max_success_wall_s": 7.1597378749999905,
+      "median_peak_rss_bytes": 35979264,
+      "max_peak_rss_bytes": 36388864
+    },
+    "yt-dlp-script": {
+      "successes": 5,
+      "attempts": 5,
+      "median_attempt_wall_s": 16.331881334000002,
+      "median_success_wall_s": 16.331881334000002,
+      "min_success_wall_s": 11.136285666999996,
+      "max_success_wall_s": 18.98077645800001,
+      "median_peak_rss_bytes": 354451456,
+      "max_peak_rss_bytes": 356401152
+    }
+  },
+  "comparisons": {
+    "aot-cookies": {
+      "matching_transcripts": true,
+      "yt_dlp_over_aot_median_wall_ratio": 7.175714362043252
+    }
+  }
+}

@@ -1,0 +1,8 @@
+bin/
+obj/
+artifacts/
+__pycache__/
+.DS_Store
+*.user
+.idea/
+.vs/

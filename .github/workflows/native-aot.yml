@@ -1,0 +1,69 @@
+name: Native AOT
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-aot-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    name: ${{ matrix.rid }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15
+            rid: osx-arm64
+            python: python3
+            binary: yt-dlp-explode
+          - runner: macos-15-intel
+            rid: osx-x64
+            python: python3
+            binary: yt-dlp-explode
+          - runner: ubuntu-22.04
+            rid: linux-x64
+            python: python3
+            binary: yt-dlp-explode
+          - runner: ubuntu-24.04-arm
+            rid: linux-arm64
+            python: python3
+            binary: yt-dlp-explode
+          - runner: windows-2022
+            rid: win-x64
+            python: python
+            binary: yt-dlp-explode.exe
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: 10.0.401
+      - name: Install Linux native toolchain
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y clang zlib1g-dev
+      - name: Publish native executable
+        run: dotnet publish src/yt-dlp-explode.csproj -c Release -r ${{ matrix.rid }} -o artifacts/${{ matrix.rid }}
+      - name: Check config, cookie, and subtitle compatibility
+        run: dotnet run --project tests/CompatibilityTests.csproj -c Release
+      - name: Smoke-test native executable
+        run: ${{ matrix.python }} scripts/smoke_test.py artifacts/${{ matrix.rid }}/${{ matrix.binary }}
+      - name: Package native executable
+        run: ${{ matrix.python }} scripts/package.py ${{ matrix.rid }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: yt-dlp-explode-${{ matrix.rid }}
+          path: artifacts/dist/*
+          if-no-files-found: error
+          retention-days: 30
