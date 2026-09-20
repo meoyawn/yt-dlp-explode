@@ -85,3 +85,8 @@ output hash, and threshold outcome. Raw artifacts are in local ignored
 smoke checks passed. Live pulls matched the same transcript in every measured
 attempt. The upstream library PR #970 remains open and unchanged; all CLI
 optimizations live in this separate repository.
+
+[Native AOT CI](https://github.com/meoyawn/yt-dlp-explode/actions/runs/35528400527)
+passed on all five targets: macOS ARM64/x64, Linux ARM64/x64, and Windows x64.
+Each built the native executable, ran compatibility and native smoke checks,
+and packaged the executable and documentation.
