@@ -63,11 +63,9 @@ jobs:
         run: dotnet run --project tests/CompatibilityTests.csproj -c Release
       - name: Smoke-test native executable
         run: bun scripts/smoke-test.ts artifacts/${{ matrix.rid }}/${{ matrix.binary }}
-      - name: Package native executable
-        run: bun scripts/package.ts ${{ matrix.rid }}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: yt-dlp-explode-${{ matrix.rid }}
-          path: artifacts/dist/*
+          path: artifacts/${{ matrix.rid }}/${{ matrix.binary }}
           if-no-files-found: error
           retention-days: 30

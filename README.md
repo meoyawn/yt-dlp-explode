@@ -110,10 +110,10 @@ CI builds and tests executables on their target OS/architecture:
 | `linux-arm64` | Ubuntu 24.04 ARM64 |
 | `win-x64`     | Windows 2022       |
 
-Download archives from a successful [Actions run](https://github.com/meoyawn/yt-dlp-explode/actions/workflows/native-aot.yml).
-Each includes the executable, licenses, and checksums. Unix executables are
-packaged in tar archives to preserve permissions. Builds are not signed or
-notarized. Linux binaries need the build runner's glibc version or newer.
+Download the artifact for your platform from a successful [Actions run](https://github.com/meoyawn/yt-dlp-explode/actions/workflows/native-aot.yml).
+Each contains only the native executable. Extract GitHub's artifact ZIP and, on
+macOS or Linux, run `chmod +x yt-dlp-explode` before using it. Builds are not signed
+or notarized. Linux binaries need the build runner's glibc version or newer.
 
 Native AOT, workstation GC, HTTP compression, HTTP/2 with HTTP/1.1 fallback,
 and reuse of the caption-only library path keep startup and memory overhead low.
@@ -147,13 +147,9 @@ bun run typecheck
 bun test
 pkgx dotnet run --project tests/CompatibilityTests.csproj -c Release
 bun scripts/smoke-test.ts artifacts/osx-arm64/yt-dlp-explode
-bun scripts/package.ts osx-arm64
 ```
 
 These checks use synthetic config and cookie files; they do not require YouTube
 or a real account. Live script compatibility is measured separately.
-Packaging uses the target OS's `tar` command (including Windows' bundled tar)
-and writes archives and SHA-256 checksums to `artifacts/dist/`.
 
 MIT; see [LICENSE](LICENSE) and [YoutubeExplode's license](external/YoutubeExplode/License.txt).
-Native archives include the submodule license as `licenses/YoutubeExplode.txt`.
