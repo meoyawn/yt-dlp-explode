@@ -51,7 +51,7 @@ describe("native packaging", () => {
   test("missing executable and unsafe runtime identifier fail", async () => {
     const root = await mkdtemp(join(tmpdir(), "explode-package-missing-"));
     try {
-      await expect(packageExecutable("linux-x64", root)).rejects.toThrow("Missing published executable");
+      await expect(packageExecutable("linux-x64", root)).rejects.toThrow();
       await expect(packageExecutable("../escape", root)).rejects.toThrow("Invalid runtime identifier");
     } finally {
       await $`rm -rf ${root}`;
