@@ -24,8 +24,8 @@ export async function packageExecutable(rid: string, root = resolve(import.meta.
   try {
     const directory = join(temporary, name);
     await $`mkdir -p ${dist} ${join(directory, "licenses")}`;
-    await $`cp -p ${binary} README.md COMPATIBILITY.md LICENSE ${directory}`.cwd(root);
-    await $`cp -p external/YoutubeExplode/License.txt ${join(directory, "licenses", "YoutubeExplode.txt")}`.cwd(root);
+    await $`cp ${binary} README.md COMPATIBILITY.md LICENSE ${directory}`.cwd(root);
+    await $`cp external/YoutubeExplode/License.txt ${join(directory, "licenses", "YoutubeExplode.txt")}`.cwd(root);
     await writeChecksum(binary, join(directory, "SHA256SUMS"));
     await $`tar ${windows ? "-acf" : "-czf"} ${archive} -C ${temporary} ${name}`;
   } finally {
