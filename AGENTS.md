@@ -1,0 +1,2 @@
+- CLI surface must be exact copy of `yt-dlp`
+- for scripting use $bun-shell only

@@ -102,13 +102,13 @@ install -m 755 artifacts/osx-arm64/yt-dlp-explode ~/.local/bin/yt-dlp-explode
 
 CI builds and tests executables on their target OS/architecture:
 
-| Target | Runner |
-| --- | --- |
-| `osx-arm64` | macOS 15 ARM64 |
-| `osx-x64` | macOS 15 Intel |
-| `linux-x64` | Ubuntu 22.04 |
+| Target        | Runner             |
+| ------------- | ------------------ |
+| `osx-arm64`   | macOS 15 ARM64     |
+| `osx-x64`     | macOS 15 Intel     |
+| `linux-x64`   | Ubuntu 22.04       |
 | `linux-arm64` | Ubuntu 24.04 ARM64 |
-| `win-x64` | Windows 2022 |
+| `win-x64`     | Windows 2022       |
 
 Download archives from a successful [Actions run](https://github.com/meoyawn/yt-dlp-explode/actions/workflows/native-aot.yml).
 Each includes the executable, licenses, and checksums. Unix executables are
@@ -139,12 +139,20 @@ released upstream package contains the fix, it can replace the source dependency
 
 ## Validation
 
+Repository scripts use Bun 1.4.2. Install their development dependencies once
+with `bun install`.
+
 ```sh
+bun run typecheck
+bun test
 pkgx dotnet run --project tests/CompatibilityTests.csproj -c Release
-python3 scripts/smoke_test.py artifacts/osx-arm64/yt-dlp-explode
+bun scripts/smoke-test.ts artifacts/osx-arm64/yt-dlp-explode
+bun scripts/package.ts osx-arm64
 ```
 
 These checks use synthetic config and cookie files; they do not require YouTube
 or a real account. Live script compatibility is measured separately.
+Packaging uses the target OS's `tar` command (including Windows' bundled tar)
+and writes archives and SHA-256 checksums to `artifacts/dist/`.
 
 MIT; see [LICENSE](LICENSE) and [YoutubeExplode's license](licenses/YoutubeExplode.txt).

@@ -8,7 +8,7 @@ write English JSON3 subtitles. It does not invoke Node or the transcript script.
 pkgx dotnet publish src/yt-dlp-explode.csproj \
   -c Release -r osx-arm64 -o artifacts/osx-arm64
 
-python3 benchmarks/benchmark.py \
+bun benchmarks/benchmark.ts \
   --yt-dlp /Users/meoyawn/.local/bin/yt-dlp \
   --cookies /Users/meoyawn/.yt-dlp/cookies.txt \
   --runs 5 --max-median 2.276
@@ -46,12 +46,14 @@ under ignored `artifacts/benchmarks/`; reviewed reports are copied here.
 
 ## Historical script benchmark
 
-`script_benchmark.py` preserves the earlier `transcribe.ts` comparison. Its
+`script-benchmark.ts` preserves the earlier `transcribe.ts` comparison. Its
 boundary includes Node startup and a separate Node caption fetch after the
 metadata subprocess exits. Those timings are not direct CLI measurements.
+The Bun version also includes a Bun Shell wrapper for each `yt-dlp` invocation;
+historical results predate this wrapper and have not been remeasured.
 
 ```sh
-python3 benchmarks/script_benchmark.py \
+bun benchmarks/script-benchmark.ts \
   --script /Users/meoyawn/agent/scripts/transcribe.ts \
   --cookies /Users/meoyawn/.yt-dlp/cookies.txt --runs 5
 ```

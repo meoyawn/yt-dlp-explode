@@ -97,14 +97,17 @@ a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a
   same transcript hash.
 - The benchmark exited zero: all measured pulls succeeded and hashes matched.
 
+The equivalent invocation with the current Bun harness is below. Historical
+measurements used the earlier harness and have not been remeasured.
+
 ```sh
-pkgx dotnet publish src/youtube-transcript.csproj \
+pkgx dotnet publish src/yt-dlp-explode.csproj \
   -c Release -r osx-arm64 -o artifacts/osx-arm64
 
-python3 benchmarks/benchmark.py \
+bun benchmarks/script-benchmark.ts \
   --script /Users/meoyawn/agent/scripts/transcribe.ts \
   --cookies /Users/meoyawn/.yt-dlp/cookies.txt \
-  --authenticated-only --runs 5
+  --runs 5
 ```
 
 [results.json](results.json) contains measured/warm-up durations, commands,
