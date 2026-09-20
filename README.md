@@ -155,4 +155,5 @@ or a real account. Live script compatibility is measured separately.
 Packaging uses the target OS's `tar` command (including Windows' bundled tar)
 and writes archives and SHA-256 checksums to `artifacts/dist/`.
 
-MIT; see [LICENSE](LICENSE) and [YoutubeExplode's license](licenses/YoutubeExplode.txt).
+MIT; see [LICENSE](LICENSE) and [YoutubeExplode's license](external/YoutubeExplode/License.txt).
+Native archives include the submodule license as `licenses/YoutubeExplode.txt`.

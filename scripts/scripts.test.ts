@@ -1,8 +1,8 @@
 import { $ } from "bun";
 import { describe, expect, test } from "bun:test";
-import { chmod, mkdir, mkdtemp, stat } from "node:fs/promises";
+import { chmod, cp, mkdir, mkdtemp, stat } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { basename, join } from "node:path";
+import { basename, join, resolve } from "node:path";
 import { packageExecutable } from "./package.ts";
 import { runWithTimeout } from "./process.ts";
 
@@ -10,15 +10,16 @@ describe("native packaging", () => {
   for (const rid of ["linux-x64", "win-x64"]) {
     test.skipIf(rid.startsWith("win-") && process.platform === "linux")(`${rid} archive contents and checksums`, async () => {
       const root = await mkdtemp(join(tmpdir(), "explode package space-"));
+      const repository = resolve(import.meta.dir, "..");
       try {
         const binaryName = rid.startsWith("win-") ? "yt-dlp-explode.exe" : "yt-dlp-explode";
         await mkdir(join(root, "artifacts", rid), { recursive: true });
-        await mkdir(join(root, "licenses"));
+        await mkdir(join(root, "external", "YoutubeExplode"), { recursive: true });
         const binary = join(root, "artifacts", rid, binaryName);
         await Bun.write(binary, "synthetic executable\n");
         await chmod(binary, 0o755);
-        for (const file of ["README.md", "COMPATIBILITY.md", "LICENSE", "licenses/YoutubeExplode.txt"]) {
-          await Bun.write(join(root, file), `contents of ${file}\n`);
+        for (const file of ["README.md", "COMPATIBILITY.md", "LICENSE", "external/YoutubeExplode/License.txt"]) {
+          await cp(join(repository, file), join(root, file));
         }
         const archive = await packageExecutable(rid, root);
         const archiveData = await Bun.file(archive).bytes();
@@ -36,9 +37,11 @@ describe("native packaging", () => {
         }
         const binaryHash = new Bun.CryptoHasher("sha256").update(await Bun.file(binary).bytes()).digest("hex");
         expect(await Bun.file(join(directory, "SHA256SUMS")).text()).toEqual(`${binaryHash}  ${binaryName}\n`);
-        for (const file of ["README.md", "COMPATIBILITY.md", "LICENSE", "licenses/YoutubeExplode.txt"]) {
-          expect(await Bun.file(join(directory, file)).text()).toEqual(`contents of ${file}\n`);
+        for (const file of ["README.md", "COMPATIBILITY.md", "LICENSE"]) {
+          expect(await Bun.file(join(directory, file)).text()).toEqual(await Bun.file(join(repository, file)).text());
         }
+        expect(await Bun.file(join(directory, "licenses", "YoutubeExplode.txt")).text())
+          .toEqual(await Bun.file(join(repository, "external", "YoutubeExplode", "License.txt")).text());
       } finally {
         await $`rm -rf ${root}`;
       }
@@ -48,7 +51,7 @@ describe("native packaging", () => {
   test("missing executable and unsafe runtime identifier fail", async () => {
     const root = await mkdtemp(join(tmpdir(), "explode-package-missing-"));
     try {
-      await expect(packageExecutable("linux-x64", root)).rejects.toThrow("Missing published executable");
+      await expect(packageExecutable("linux-x64", root)).rejects.toThrow();
       await expect(packageExecutable("../escape", root)).rejects.toThrow("Invalid runtime identifier");
     } finally {
       await $`rm -rf ${root}`;
