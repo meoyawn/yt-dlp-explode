@@ -24,7 +24,7 @@ with tempfile.TemporaryDirectory() as temporary:
     package = Path(temporary) / name
     package.mkdir()
     shutil.copy2(binary, package / binary_name)
-    for filename in ("README.md", "LICENSE"):
+    for filename in ("README.md", "COMPATIBILITY.md", "LICENSE"):
         shutil.copy2(root / filename, package / filename)
     shutil.copytree(root / "licenses", package / "licenses")
     (package / "SHA256SUMS").write_text(
