@@ -1,40 +1,60 @@
-# Caption compatibility benchmark
+# Direct CLI benchmark
 
-See [measured results](RESULTS.md) for the five-run comparison.
-
-Runs the user's existing transcript script unchanged, comparing installed yt-dlp
-with the native `yt-dlp-explode` binary behind the same `yt-dlp` command name.
-The script's metadata flags, language selection, JSON3 fetch, parsing, and output
-are identical in both variants.
+See [measured results](RESULTS.md) and the [profiling investigation](PROFILE.md).
+The current benchmark invokes **both CLIs directly**, with the same flags, to
+write English JSON3 subtitles. It does not invoke Node or the transcript script.
 
 ```sh
 pkgx dotnet publish src/yt-dlp-explode.csproj \
   -c Release -r osx-arm64 -o artifacts/osx-arm64
 
 python3 benchmarks/benchmark.py \
-  --script /Users/meoyawn/agent/scripts/transcribe.ts \
+  --yt-dlp /Users/meoyawn/.local/bin/yt-dlp \
   --cookies /Users/meoyawn/.yt-dlp/cookies.txt \
-  --runs 5
+  --runs 5 --max-median 2.276
 ```
 
-Each invocation gets a fresh transcript cache, process, and independent copy of
-the cookie file. The source cookie file and script remain unchanged. A small
-Python exec wrapper supplies the selected executable and temporary cookie path;
-its overhead is included for both tools. Other yt-dlp config remains active.
+The selected installed yt-dlp executable runs as-is. Both use normal config
+lookup, including `~/.yt-dlp/config.txt`; the measurement used its configured
+`youtube:player_client=web_embedded`. The benchmark does not add `default` to
+that selection. Each call overrides only the shared action/output options,
+cache directory, and cookie path with an independent temporary copy:
 
-One warmup per variant is excluded, then five measured runs alternate order,
-with two-second pauses outside timing. Script startup, native/Python extraction,
-Node caption fetch, parsing, output writing, and cookie-jar saves are included.
-Builds, cookie copying, pauses, and output validation are excluded. OS/DNS caches
-remain warm. On macOS `/usr/bin/time -l` reports maximum resident set size; this
-is not summed concurrent process-tree memory, and the native variant includes
-Node because both variants run the same transcript script.
+```sh
+TOOL --skip-download --write-auto-subs --sub-langs en --sub-format json3 \
+  --no-warnings --no-playlist --cookies COOKIE_COPY --cache-dir SHARED_CACHE \
+  -P FRESH_OUTPUT -o '%(id)s.%(ext)s' -- 'https://www.youtube.com/watch?v=4Ff0xc9M8kA'
+```
 
-Success requires all measured runs to return nonempty captions without falling
-back to audio transcription. Text hashes must match after stripping timestamps
-and normalizing whitespace. Failed attempts are reported as failures, not speed.
-Logs and transcripts stay under ignored `artifacts/benchmarks/` directories.
-No cookie values or signed caption URLs are stored in the report.
+One excluded warmup for each tool starts with an empty cache directory. Five
+measured runs alternate order, with two-second pauses outside timing. Tool
+caches persist after warmup; subtitles always go into fresh directories and
+are downloaded on every run. Use `--cold-cache` to disable both disk caches.
+OS/DNS caches remain warm. The user's original cookie file remains unchanged.
 
-The [history](history/README.md) directory preserves earlier experiments with the
-initial standalone text CLI, before adopting yt-dlp's command-line interface.
+Timing includes process startup, config/cookie load, caption discovery, subtitle
+download and output writing, cookie save, and process exit. Builds, cookie
+copying, validation, and pauses are excluded. macOS `/usr/bin/time -l` reports
+the child process's peak RSS; no Node wrapper is involved.
+
+Success requires five successful, nonempty subtitle files from each tool and
+matching normalized text hashes. Errors are recorded as failures and never
+counted as fast pulls. `--max-median` additionally requires the native median
+not to exceed the given time. Executable versions/hashes are checked before
+and after the series to catch concurrent updates. Full reports and logs stay
+under ignored `artifacts/benchmarks/`; reviewed reports are copied here.
+
+## Historical script benchmark
+
+`script_benchmark.py` preserves the earlier `transcribe.ts` comparison. Its
+boundary includes Node startup and a separate Node caption fetch after the
+metadata subprocess exits. Those timings are not direct CLI measurements.
+
+```sh
+python3 benchmarks/script_benchmark.py \
+  --script /Users/meoyawn/agent/scripts/transcribe.ts \
+  --cookies /Users/meoyawn/.yt-dlp/cookies.txt --runs 5
+```
+
+See [the historical script results](history/SCRIPT-RESULTS.md) and the other
+[historical experiments](history/README.md).

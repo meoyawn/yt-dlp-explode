@@ -26,6 +26,8 @@ internal static class Program
           -P, --paths PATH             Output directory, optionally home:/subtitle:
           --cookies FILE              Read AND save a Netscape cookie jar
           --no-cookies                Disable cookie-file load/save
+          --cache-dir DIR             Cache public player scripts (yt-dlp cache location)
+          --no-cache-dir              Disable reading and writing that cache
           --config-locations PATH      Additional config file/directory; repeatable
           --ignore-config             Disable automatic config discovery
           -s, --simulate               Retrieve metadata without writing subtitles
@@ -47,6 +49,15 @@ internal static class Program
 
     public static async Task<int> Main(string[] args)
     {
+        // .NET 10 keeps the TLS 1.3-capable macOS backend opt-in. Leave an
+        // explicit runtime environment setting available for diagnostics.
+        if (
+            OperatingSystem.IsMacOS()
+            && Environment.GetEnvironmentVariable("DOTNET_SYSTEM_NET_SECURITY_USENETWORKFRAMEWORK")
+                is null
+        )
+            AppContext.SetSwitch("System.Net.Security.UseNetworkFramework", true);
+        var configStart = Profile.Now;
         Options options;
         try
         {
@@ -56,6 +67,7 @@ internal static class Program
                 Environment.CurrentDirectory
             );
             options = Options.Parse(configuration.Load(args));
+            Profile.Add("config", configStart);
             if (options.Help)
             {
                 Console.WriteLine(Help);
@@ -63,7 +75,7 @@ internal static class Program
             }
             if (options.Version)
             {
-                Console.WriteLine("0.1.0");
+                Console.WriteLine("0.1.1");
                 return 0;
             }
             if (options.Verbose)
@@ -97,7 +109,9 @@ internal static class Program
         Console.CancelKeyPress += cancel;
         try
         {
+            var jarStart = Profile.Now;
             jar = new CookieJar(options.Cookies, Warning);
+            Profile.Add("cookie_load", jarStart);
             if (
                 options.PlayerClients == "web_embedded"
                 && !jar.YoutubeCookies().Any(x => x.Name == "LOGIN_INFO")
@@ -105,7 +119,13 @@ internal static class Program
                 throw new ArgumentException(
                     "The pinned library currently requires a logged-in cookie jar for forced web_embedded captions; use player_client=default for anonymous access."
                 );
-            using var session = new CaptionSession(jar, options.SocketTimeout);
+            var sessionStart = Profile.Now;
+            using var session = new CaptionSession(
+                jar,
+                options.SocketTimeout,
+                options.CacheDirectory
+            );
+            Profile.Add("client_setup", sessionStart);
             foreach (var url in options.Urls)
             {
                 try
@@ -113,11 +133,15 @@ internal static class Program
                     var timer = Stopwatch.StartNew();
                     var requestsBefore = session.RequestCount;
                     var id = VideoId.Parse(url).ToString();
+                    var manifestStart = Profile.Now;
                     var manifest = await session.ManifestAsync(id, cancellation.Token);
+                    Profile.Add("manifest", manifestStart);
                     var manifestMs = timer.Elapsed.TotalMilliseconds;
+                    var selectionStart = Profile.Now;
                     var info = new CaptionInfo(id, url, session.Player, manifest, options);
                     info.Populate();
                     info.Select(Warning);
+                    Profile.Add("caption_selection", selectionStart);
                     if (options.ListSubs)
                     {
                         foreach (
@@ -170,8 +194,10 @@ internal static class Program
                             info.Selected[pair.Key] = (sub, format, file);
                         }
                     }
+                    var outputStart = Profile.Now;
                     if (options.DumpJson)
                         info.WriteJson(Console.OpenStandardOutput());
+                    Profile.Add("json_output", outputStart);
                     if (options.Verbose)
                         Console.Error.WriteLine(
                             $"[debug] {session.RequestCount - requestsBefore} HTTP requests for {id}"
@@ -216,7 +242,9 @@ internal static class Program
             Console.CancelKeyPress -= cancel;
             try
             {
+                var saveStart = Profile.Now;
                 jar?.Save();
+                Profile.Add("cookie_save", saveStart);
             }
             catch (Exception ex)
             {
@@ -224,6 +252,7 @@ internal static class Program
                 exitCode = 1;
             }
         }
+        Profile.Save();
         return exitCode;
     }
 }

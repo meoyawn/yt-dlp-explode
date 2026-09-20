@@ -67,6 +67,13 @@ atomic replacement, private Unix permissions, and a merge of this process's
 changes. `--no-cookies` overrides a configured file. No cookie file is implicitly
 selected without a `--cookies` option in config or on the command line.
 
+`--cache-dir DIR` and `--no-cache-dir` control a bounded cache of public,
+versioned YouTube player scripts. By default it uses
+`$XDG_CACHE_HOME/yt-dlp/yt-dlp-explode-player-v1` (or
+`~/.cache/yt-dlp/yt-dlp-explode-player-v1`). Entries honor server freshness,
+expire within seven days, and are limited to 16 scripts of at most 4 MiB each.
+Caption downloads, signed URLs, and account metadata are always fetched afresh.
+
 EJS/JavaScript runtime settings are accepted for shared config compatibility;
 this caption-only path does not execute media JavaScript challenges or download
 remote components. No Python, Node, or yt-dlp runtime is needed by the executable.
@@ -108,13 +115,17 @@ Each includes the executable, licenses, and checksums. Unix executables are
 packaged in tar archives to preserve permissions. Builds are not signed or
 notarized. Linux binaries need the build runner's glibc version or newer.
 
-Native AOT, workstation GC, HTTP compression, and reuse of the caption-only
-library path keep startup and memory overhead low. See [benchmarks](benchmarks/README.md).
+Native AOT, workstation GC, HTTP compression, HTTP/2 with HTTP/1.1 fallback,
+and reuse of the caption-only library path keep startup and memory overhead low.
+On macOS, the CLI opts into .NET 10's TLS 1.3-capable Network.framework backend. See [benchmarks](benchmarks/README.md).
 The library buffers responses and caption metadata; this is not a streaming API.
 
-The unchanged transcript script succeeded 5/5 with matching text: 4.835 s median
-using this executable versus 18.579 s using yt-dlp. A direct native subtitle
-download used 39.3 MiB peak RSS. See [measurement details](benchmarks/RESULTS.md).
+Direct CLI subtitle downloads succeeded **5/5** with matching text:
+**1.839 s median** for this executable versus **14.477 s** for the
+user's local yt-dlp 2026.08.19, using warmed tool caches and fresh captions.
+Native median peak RSS was **39.7 MiB**. The requested ≤2.276 s median is met;
+network outliers still occur. See [measurement details](benchmarks/RESULTS.md)
+and [profiling](benchmarks/PROFILE.md).
 
 ## Library dependency
 

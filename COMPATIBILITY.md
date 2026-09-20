@@ -27,6 +27,8 @@ been reached, and the executable never delegates unsupported work to yt-dlp.
   `home:`/`subtitle:` directories; existing-file preservation and forced overwrite.
 - `--no-playlist`, quiet/warning/verbose toggles, `--ignore-errors`,
   `--socket-timeout`, cancellation, and multiple sequential video URLs.
+- `--cache-dir`/`--no-cache-dir`: bounded public player-script caching under
+  yt-dlp's XDG cache directory, isolated in `yt-dlp-explode-player-v1`.
 - The exact shared config and JSON command used by the existing `transcribe.ts`
   workflow. Caption JSON remains on stdout; diagnostics remain on stderr.
 
@@ -41,9 +43,11 @@ been reached, and the executable never delegates unsupported work to yt-dlp.
 - The pinned library supports `player_client=default`, `web_embedded`, or their
   combination. A forced `web_embedded` request currently needs login cookies.
   Other client selections are rejected. `youtube:skip=translated_subs` is supported.
-- `--remote-components ejs:github/ejs:npm`, `--js-runtimes`, and cache toggles
-  are accepted as inactive media-challenge settings. They do not trigger remote
-  downloads, JavaScript execution, or a persistent media cache on this path.
+- `--remote-components ejs:github/ejs:npm` and `--js-runtimes` are accepted as
+  inactive media-challenge settings. They do not trigger component downloads or
+  JavaScript execution. Only public versioned player scripts are cached; caption
+  responses and authenticated bootstrap metadata are always fetched afresh.
+  `--rm-cache-dir` is not implemented yet.
 - Output templates currently support `id`, `title`, `ext`, `uploader`, `channel`,
   `channel_id`, and `duration`, with string/integer conversion and `%%`. Advanced
   template expressions and exact filename sanitization parity remain future work.
@@ -66,4 +70,5 @@ been reached, and the executable never delegates unsupported work to yt-dlp.
 
 Reference implementation inspected: local yt-dlp source at
 [`c7fb478`](https://github.com/yt-dlp/yt-dlp/tree/c7fb478d21e9e59524befbe23f7801bb267fb880).
-Installed yt-dlp used for live comparisons: 2026.07.04.
+Local yt-dlp used for the current direct CLI comparison: 2026.08.19.
+Historical script comparisons used 2026.07.04.

@@ -17,9 +17,9 @@ internal sealed class CaptionSession : IDisposable
     public int RequestCount => _handler.Count;
     public JsonElement Player => _handler.Player;
 
-    public CaptionSession(CookieJar jar, double socketTimeout)
+    public CaptionSession(CookieJar jar, double socketTimeout, string? cacheDirectory)
     {
-        _handler = new CaptureHandler(jar.Container);
+        _handler = new CaptureHandler(jar.Container, cacheDirectory);
         _http = new HttpClient(_handler) { Timeout = TimeSpan.FromSeconds(socketTimeout) };
         _youtube = new YoutubeClient(_http, jar.YoutubeCookies());
     }
@@ -43,16 +43,19 @@ internal sealed class CaptionSession : IDisposable
         _http.Dispose();
     }
 
-    private sealed class CaptureHandler(CookieContainer cookies)
+    private sealed class CaptureHandler(CookieContainer cookies, string? cacheDirectory)
         : DelegatingHandler(
-            new HttpClientHandler
-            {
-                CookieContainer = cookies,
-                AutomaticDecompression = DecompressionMethods.All,
-            }
+            new PlayerScriptCache(
+                new HttpClientHandler
+                {
+                    CookieContainer = cookies,
+                    AutomaticDecompression = DecompressionMethods.All,
+                },
+                cacheDirectory
+            )
         )
     {
-        public int Count { get; private set; }
+        public int Count => ((PlayerScriptCache)InnerHandler!).RequestCount;
         public JsonElement Player { get; private set; }
 
         protected override async Task<HttpResponseMessage> SendAsync(
@@ -60,7 +63,8 @@ internal sealed class CaptionSession : IDisposable
             CancellationToken token
         )
         {
-            Count++;
+            request.Version = HttpVersion.Version20;
+            request.VersionPolicy = HttpVersionPolicy.RequestVersionOrLower;
             // Share one HTTP cookie jar, including cookies received during redirects.
             if (
                 request.RequestUri is { } uri
@@ -84,10 +88,12 @@ internal sealed class CaptionSession : IDisposable
                 && response.IsSuccessStatusCode
             )
             {
+                var parseStart = Profile.Now;
                 using var json = JsonDocument.Parse(
                     await response.Content.ReadAsStringAsync(token)
                 );
                 Player = json.RootElement.Clone();
+                Profile.Add("capture_player_json", parseStart);
             }
             return response;
         }

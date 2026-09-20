@@ -1,63 +1,87 @@
-# yt-dlp interface compatibility benchmark — 2026-09-20
+# Direct CLI benchmark — 2026-09-20
 
-The same unmodified `/Users/meoyawn/agent/scripts/transcribe.ts` ran against two
-executables, substituted behind the `yt-dlp` command name through a temporary
-PATH wrapper. Both variants succeeded in **5/5** measured attempts on
-[4Ff0xc9M8kA](https://www.youtube.com/watch?v=4Ff0xc9M8kA). Every normalized
-transcript hash matched (2,009 words).
+**The ≤2.276 s median target is met: 1.839 s.**
+Both CLIs succeeded in **5/5** measured attempts on
+[4Ff0xc9M8kA](https://www.youtube.com/watch?v=4Ff0xc9M8kA), downloading English
+JSON3 subtitles. All normalized text hashes match (2,009 words). Tool caches
+were warmed by one excluded invocation; captions were downloaded afresh each
+time. No Node script, wrapper CLI, or alternate yt-dlp environment was used.
 
-| Script backend | Success | Median wall time | Range | Median peak RSS |
+| CLI | Success | Median wall time | Range | Median peak RSS |
 | --- | ---: | ---: | ---: | ---: |
-| yt-dlp-explode Native AOT | 5/5 | 4.835 s | 3.703–10.584 s | 95.9 MiB |
-| yt-dlp 2026.07.04 | 5/5 | 18.579 s | 17.327–29.447 s | 337.9 MiB |
+| yt-dlp-explode 0.1.1 Native AOT | 5/5 | 1.839 s | 1.654–5.860 s | 39.7 MiB |
+| Local yt-dlp 2026.08.19 | 5/5 | 14.477 s | 9.200–18.239 s | 339.2 MiB |
 
-The ratio of median times is **3.84×**. These are complete
-script workflows, including Node startup, caption fetch/parsing, output writing,
-and cookie-jar saves. RSS is macOS `time -l`'s maximum resident set size, not a
-sum of concurrent process memory. The native backend row still includes Node
-because the transcript script itself uses Node.
+The median ratio is **7.87×**. The native median is
+19.2% below the requested limit. This is a measured
+median, not a maximum-latency guarantee: the 5.860 s native
+outlier remains included.
 
 | Attempt | yt-dlp-explode seconds | yt-dlp seconds |
 | --- | ---: | ---: |
-| 1 | 10.584 | 17.767 |
-| 2 | 3.703 | 18.579 |
-| 3 | 8.220 | 29.447 |
-| 4 | 3.740 | 17.327 |
-| 5 | 4.835 | 23.012 |
+| 1 | 1.839 | 18.239 |
+| 2 | 2.093 | 10.937 |
+| 3 | 5.860 | 9.200 |
+| 4 | 1.738 | 14.477 |
+| 5 | 1.654 | 15.118 |
 
-A separate direct-native `--skip-download --write-auto-subs --sub-langs en
---sub-format json3` check matched the same text in four HTTP requests and used
-**39.3 MiB peak RSS**. This is one standalone memory observation,
-not the script-workflow median. Existing-file preservation skipped the caption
-request; `--force-overwrites` fetched it again. Cookie saves and output-template
-filenames were verified in both cases.
+## What changed
+
+- Corrected the benchmark boundary: complete CLI subtitle downloads for both
+  tools. The old 4.835 s measurement included the separate Node workflow and
+  its extra caption connection; it was not comparable to the original 2.276 s
+  native CLI measurement.
+- Cached public, versioned player scripts using server freshness, checksums,
+  bounded storage, and atomic writes. Warm pulls use three network requests;
+  authenticated bootstrap metadata and captions remain fresh.
+- Preferred HTTP/2 with HTTP/1.1 fallback, and opted into .NET 10's supported
+  macOS TLS 1.3 backend. Profiling isolated long outliers in TLS setup. Network
+  spikes remain possible; no extra caption retries were added.
+
+[PROFILE.md](PROFILE.md) contains timings, evidence, diagnostic commands, and
+all exploratory transport results. The [cache-only release trial](history/cache-only-results.json)
+missed the target at 4.604 s and is preserved. The older
+[script comparison](history/SCRIPT-RESULTS.md) is also retained.
 
 ## Environment and method
 
 Apple M1 Pro, macOS 26.4 ARM64; .NET SDK 10.0.401, Native AOT Release.
-The standalone executable is 7,804,992 bytes
-(7.44 MiB). Library dependency:
+Executable: 7,954,208 bytes (7.59 MiB).
+YoutubeExplode dependency remains pinned to
 [`dd8598c`](https://github.com/meoyawn/YoutubeExplode/commit/dd8598cabd87984e23a78f91bd99189240bccca3).
 
-One excluded warmup per variant, fresh processes/transcript caches/cookie copies,
-alternating order, and two-second pauses outside timing. Normal yt-dlp config
-remained active; only the cookie path was overridden with an independent copy.
-The user's script and original cookie file were not modified. No local builds
-or tests ran during measurement. OS/DNS caches remained warm.
+Baseline: `/Users/meoyawn/.local/bin/yt-dlp`, version 2026.08.19,
+used as installed. The earlier 2026.07.04/curl_cffi installation aborted during
+an exploratory direct download; the user's local install changed to 2026.08.19
+before this comparison and all its measured attempts succeeded. No isolated
+replacement was used. Both executables' versions and hashes were stable across
+the final series.
 
-This validates the current caption milestone for this video/account/network/date.
-It does not establish complete yt-dlp API parity or general extractor reliability.
-[results.json](results.json) records executable/script hashes, all timings,
-commands, and output hashes. Raw logs/transcripts remain in ignored local
-`artifacts/benchmarks/compatibility/`.
+Normal yt-dlp config discovery remained enabled, including the user's existing
+`youtube:player_client=web_embedded` and cookie configuration. Both received
+identical subtitle flags, a fresh output directory, an independent cookie-file
+copy, and the same initially empty cache directory. Cookie copies were removed
+after each run; the original jar was not modified.
 
-## Other validation
+The excluded cache-empty warmups took 5.399 s native and
+12.824 s yt-dlp. The headline numbers describe subsequent
+warm-cache pulls, not first use. Five measured runs alternated order with
+two-second pauses outside timing. No builds or tests ran during the measurement.
+Profiling was disabled. OS/DNS caches remained warm and the machine's existing
+tunnel route remained active.
 
-- 33 offline config/cookie/subtitle compatibility checks passed.
-- Eight native executable smoke checks passed.
-- [Native CI](https://github.com/meoyawn/yt-dlp-explode/actions/runs/35526253771)
-  passed on macOS ARM64/x64, Linux ARM64/x64, and Windows x64, including native
-  publication, compatibility checks, executable smoke checks, and packaging.
-- The upstream library PR remains open and unchanged.
+Wall time includes startup, config/cookie load, extraction, subtitle download
+and file writing, cookie save, and exit. Build time, copying cookies, validation,
+and pauses are excluded. RSS uses macOS `time -l` child resource accounting,
+not summed concurrent process-tree memory.
 
-See [reproduction instructions](README.md) and [compatibility scope](../COMPATIBILITY.md).
+[results.json](results.json) records every command, timing, executable hash,
+output hash, and threshold outcome. Raw artifacts are in local ignored
+`artifacts/benchmarks/direct-cli-final/`. See [reproduction instructions](README.md).
+
+## Validation
+
+116 offline config/cookie/subtitle/cache assertions and eight native executable
+smoke checks passed. Live pulls matched the same transcript in every measured
+attempt. The upstream library PR #970 remains open and unchanged; all CLI
+optimizations live in this separate repository.

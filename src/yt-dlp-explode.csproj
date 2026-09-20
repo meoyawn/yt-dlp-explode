@@ -9,7 +9,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <ServerGarbageCollection>false</ServerGarbageCollection>
     <IsPackable>false</IsPackable>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>meoyawn</Authors>
     <Description>Native AOT CLI targeting yt-dlp compatibility, starting with closed captions.</Description>
   </PropertyGroup>

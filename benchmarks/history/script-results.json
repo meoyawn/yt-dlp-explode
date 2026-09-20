@@ -1,0 +1,237 @@
+{
+  "date_utc": "2026-09-20T17:32:35.165290+00:00",
+  "platform": "macOS-26.4-arm64-arm-64bit",
+  "video_url": "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
+  "script": "/Users/meoyawn/agent/scripts/transcribe.ts",
+  "script_sha256": "88450aaa235c3407dd8fd5d51e14c5f98bf7e3c9d990bba15287ac6d11940cd8",
+  "binary_sha256": "5d1f9eed8fa5d7cd7ebef306352273e2758b14df2a6bc17ac63a64e3241058f1",
+  "binary_bytes": 7804992,
+  "yt_dlp_version": "2026.07.04",
+  "method": "Same unchanged transcript script, fresh processes/caches/cookie copies; only PATH's yt-dlp executable differs. One excluded warmup, alternating order, two-second pauses outside timing. RSS from macOS time -l is not summed process-tree memory.",
+  "runs": [
+    {
+      "tool": "yt-dlp-explode",
+      "iteration": 0,
+      "warmup": true,
+      "script_command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "wrapped_executable": "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/osx-arm64/yt-dlp-explode",
+      "success": true,
+      "wall_s": 3.7589728329999996,
+      "returncode": 0,
+      "words": 2009,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "peak_rss_bytes": 100630528
+    },
+    {
+      "tool": "yt-dlp",
+      "iteration": 0,
+      "warmup": true,
+      "script_command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "wrapped_executable": "/Users/meoyawn/.local/bin/yt-dlp",
+      "success": true,
+      "wall_s": 13.092954625,
+      "returncode": 0,
+      "words": 2009,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "peak_rss_bytes": 352223232
+    },
+    {
+      "tool": "yt-dlp",
+      "iteration": 1,
+      "warmup": false,
+      "script_command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "wrapped_executable": "/Users/meoyawn/.local/bin/yt-dlp",
+      "success": true,
+      "wall_s": 17.767191083999997,
+      "returncode": 0,
+      "words": 2009,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "peak_rss_bytes": 353599488
+    },
+    {
+      "tool": "yt-dlp-explode",
+      "iteration": 1,
+      "warmup": false,
+      "script_command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "wrapped_executable": "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/osx-arm64/yt-dlp-explode",
+      "success": true,
+      "wall_s": 10.584007875000005,
+      "returncode": 0,
+      "words": 2009,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "peak_rss_bytes": 100139008
+    },
+    {
+      "tool": "yt-dlp-explode",
+      "iteration": 2,
+      "warmup": false,
+      "script_command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "wrapped_executable": "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/osx-arm64/yt-dlp-explode",
+      "success": true,
+      "wall_s": 3.7034433329999956,
+      "returncode": 0,
+      "words": 2009,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "peak_rss_bytes": 100597760
+    },
+    {
+      "tool": "yt-dlp",
+      "iteration": 2,
+      "warmup": false,
+      "script_command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "wrapped_executable": "/Users/meoyawn/.local/bin/yt-dlp",
+      "success": true,
+      "wall_s": 18.578665374999993,
+      "returncode": 0,
+      "words": 2009,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "peak_rss_bytes": 354271232
+    },
+    {
+      "tool": "yt-dlp",
+      "iteration": 3,
+      "warmup": false,
+      "script_command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "wrapped_executable": "/Users/meoyawn/.local/bin/yt-dlp",
+      "success": true,
+      "wall_s": 29.44688987500001,
+      "returncode": 0,
+      "words": 2009,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "peak_rss_bytes": 354320384
+    },
+    {
+      "tool": "yt-dlp-explode",
+      "iteration": 3,
+      "warmup": false,
+      "script_command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "wrapped_executable": "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/osx-arm64/yt-dlp-explode",
+      "success": true,
+      "wall_s": 8.22029975000001,
+      "returncode": 0,
+      "words": 2009,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "peak_rss_bytes": 101007360
+    },
+    {
+      "tool": "yt-dlp-explode",
+      "iteration": 4,
+      "warmup": false,
+      "script_command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "wrapped_executable": "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/osx-arm64/yt-dlp-explode",
+      "success": true,
+      "wall_s": 3.7396343750000085,
+      "returncode": 0,
+      "words": 2009,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "peak_rss_bytes": 100040704
+    },
+    {
+      "tool": "yt-dlp",
+      "iteration": 4,
+      "warmup": false,
+      "script_command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "wrapped_executable": "/Users/meoyawn/.local/bin/yt-dlp",
+      "success": true,
+      "wall_s": 17.326905999999994,
+      "returncode": 0,
+      "words": 2009,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "peak_rss_bytes": 357482496
+    },
+    {
+      "tool": "yt-dlp",
+      "iteration": 5,
+      "warmup": false,
+      "script_command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "wrapped_executable": "/Users/meoyawn/.local/bin/yt-dlp",
+      "success": true,
+      "wall_s": 23.012174958999992,
+      "returncode": 0,
+      "words": 2009,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "peak_rss_bytes": 351010816
+    },
+    {
+      "tool": "yt-dlp-explode",
+      "iteration": 5,
+      "warmup": false,
+      "script_command": [
+        "/Users/meoyawn/agent/scripts/transcribe.ts",
+        "--file",
+        "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
+      ],
+      "wrapped_executable": "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/osx-arm64/yt-dlp-explode",
+      "success": true,
+      "wall_s": 4.834524499999986,
+      "returncode": 0,
+      "words": 2009,
+      "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
+      "peak_rss_bytes": 102170624
+    }
+  ],
+  "summary": {
+    "yt-dlp-explode": {
+      "successes": 5,
+      "attempts": 5,
+      "median_wall_s": 4.834524499999986,
+      "min_wall_s": 3.7034433329999956,
+      "max_wall_s": 10.584007875000005,
+      "median_peak_rss_bytes": 100597760
+    },
+    "yt-dlp": {
+      "successes": 5,
+      "attempts": 5,
+      "median_wall_s": 18.578665374999993,
+      "min_wall_s": 17.326905999999994,
+      "max_wall_s": 29.44688987500001,
+      "median_peak_rss_bytes": 354271232
+    }
+  },
+  "matching_transcripts": true,
+  "speed_ratio": 3.8429147220166215
+}

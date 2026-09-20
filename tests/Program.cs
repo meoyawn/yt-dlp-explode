@@ -344,6 +344,7 @@ internal static class CompatibilityTests
                     .GetString() == "json3",
                 "selected subtitle JSON"
             );
+            PlayerScriptCacheTests.RunAsync(directory, Check).GetAwaiter().GetResult();
             Console.WriteLine($"{_checks} offline compatibility checks passed.");
         }
         finally

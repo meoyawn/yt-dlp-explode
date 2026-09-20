@@ -6,6 +6,15 @@ using System.Linq;
 internal sealed class Options
 {
     public List<string> Urls { get; } = [];
+    public string? CacheDirectory { get; private set; } =
+        System.IO.Path.Combine(
+            Environment.GetEnvironmentVariable("XDG_CACHE_HOME")
+                ?? System.IO.Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                    ".cache"
+                ),
+            "yt-dlp"
+        );
     public string? Cookies { get; private set; }
     public bool Help { get; private set; }
     public bool Version { get; private set; }
@@ -208,10 +217,14 @@ internal sealed class Options
                     break; // Native caption requests do not execute media JavaScript challenges.
                 case "--no-remote-components":
                 case "--no-js-runtimes":
+                    break;
                 case "--no-cache-dir":
+                    o.CacheDirectory = null;
+                    break;
+                case "--cache-dir":
+                    o.CacheDirectory = Configuration.Expand(Value());
                     break;
                 case "--js-runtimes":
-                case "--cache-dir":
                     _ = Value();
                     break;
                 case "--ignore-config":

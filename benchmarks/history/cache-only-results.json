@@ -1,5 +1,5 @@
 {
-  "date_utc": "2026-09-20T18:10:21.055163+00:00",
+  "date_utc": "2026-09-20T18:00:43.795695+00:00",
   "platform": "macOS-26.4-arm64-arm-64bit",
   "video_url": "https://www.youtube.com/watch?v=4Ff0xc9M8kA",
   "executables": {
@@ -11,10 +11,10 @@
     "yt-dlp": "2026.08.19"
   },
   "executable_sha256": {
-    "yt-dlp-explode": "308efaf51b35a409c242753ea69e52b3a1e30560e2ffef7715234b05473c0837",
+    "yt-dlp-explode": "83fc2469eccef7dee6ab1fd3c4875c894a85885ab7ccb18d73b717dba2469813",
     "yt-dlp": "f7963fdfb457acc87c3f12f743c6f4bdefec39f5b2050966fd3c5b8e71d908c5"
   },
-  "binary_bytes": 7954208,
+  "binary_bytes": 7954176,
   "max_median_s": 2.276,
   "method": "Direct CLIs, identical flags, normal user config discovery, fresh process/output/cookie copy each run. One excluded warmup starting with an empty tool cache, alternating order, two-second pauses outside timing. Wall includes process startup, extraction, subtitle download/write and cookie save. Build, cookie copying and output validation excluded. macOS time -l measures child peak RSS.",
   "cache_policy": "same initially empty cache directory, reused after excluded warmup; no caption cache",
@@ -37,21 +37,21 @@
         "--cookies",
         "<temporary-cookie-copy>",
         "--cache-dir",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/cache",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/cache",
         "-P",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/00-yt-dlp-explode",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/00-yt-dlp-explode",
         "-o",
         "%(id)s.%(ext)s",
         "--",
         "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
       ],
-      "wall_s": 5.398576542,
+      "wall_s": 7.351987209000001,
       "returncode": 0,
       "caption_bytes": 214399,
       "words": 2009,
       "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
       "subtitle_sha256": "4b4bb7cb4407504dec608add442cc1e6317d8bfc969a54a3631e3e453e219190",
-      "peak_rss_bytes": 47087616
+      "peak_rss_bytes": 43548672
     },
     {
       "tool": "yt-dlp",
@@ -71,21 +71,21 @@
         "--cookies",
         "<temporary-cookie-copy>",
         "--cache-dir",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/cache",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/cache",
         "-P",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/00-yt-dlp",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/00-yt-dlp",
         "-o",
         "%(id)s.%(ext)s",
         "--",
         "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
       ],
-      "wall_s": 12.823764916999998,
+      "wall_s": 21.138343374999998,
       "returncode": 0,
       "caption_bytes": 214399,
       "words": 2009,
       "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
       "subtitle_sha256": "4b4bb7cb4407504dec608add442cc1e6317d8bfc969a54a3631e3e453e219190",
-      "peak_rss_bytes": 354418688
+      "peak_rss_bytes": 354631680
     },
     {
       "tool": "yt-dlp",
@@ -105,21 +105,21 @@
         "--cookies",
         "<temporary-cookie-copy>",
         "--cache-dir",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/cache",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/cache",
         "-P",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/01-yt-dlp",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/01-yt-dlp",
         "-o",
         "%(id)s.%(ext)s",
         "--",
         "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
       ],
-      "wall_s": 18.238807959,
+      "wall_s": 19.956225042,
       "returncode": 0,
       "caption_bytes": 214399,
       "words": 2009,
       "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
       "subtitle_sha256": "4b4bb7cb4407504dec608add442cc1e6317d8bfc969a54a3631e3e453e219190",
-      "peak_rss_bytes": 355713024
+      "peak_rss_bytes": 355434496
     },
     {
       "tool": "yt-dlp-explode",
@@ -139,21 +139,21 @@
         "--cookies",
         "<temporary-cookie-copy>",
         "--cache-dir",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/cache",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/cache",
         "-P",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/01-yt-dlp-explode",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/01-yt-dlp-explode",
         "-o",
         "%(id)s.%(ext)s",
         "--",
         "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
       ],
-      "wall_s": 1.8387423750000025,
+      "wall_s": 5.774440790999996,
       "returncode": 0,
       "caption_bytes": 214399,
       "words": 2009,
       "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
       "subtitle_sha256": "4b4bb7cb4407504dec608add442cc1e6317d8bfc969a54a3631e3e453e219190",
-      "peak_rss_bytes": 41811968
+      "peak_rss_bytes": 38961152
     },
     {
       "tool": "yt-dlp-explode",
@@ -173,21 +173,21 @@
         "--cookies",
         "<temporary-cookie-copy>",
         "--cache-dir",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/cache",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/cache",
         "-P",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/02-yt-dlp-explode",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/02-yt-dlp-explode",
         "-o",
         "%(id)s.%(ext)s",
         "--",
         "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
       ],
-      "wall_s": 2.0925676669999973,
+      "wall_s": 2.236234040999996,
       "returncode": 0,
       "caption_bytes": 214399,
       "words": 2009,
       "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
       "subtitle_sha256": "4b4bb7cb4407504dec608add442cc1e6317d8bfc969a54a3631e3e453e219190",
-      "peak_rss_bytes": 41615360
+      "peak_rss_bytes": 39387136
     },
     {
       "tool": "yt-dlp",
@@ -207,21 +207,21 @@
         "--cookies",
         "<temporary-cookie-copy>",
         "--cache-dir",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/cache",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/cache",
         "-P",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/02-yt-dlp",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/02-yt-dlp",
         "-o",
         "%(id)s.%(ext)s",
         "--",
         "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
       ],
-      "wall_s": 10.936869416,
+      "wall_s": 12.212033166000012,
       "returncode": 0,
       "caption_bytes": 214399,
       "words": 2009,
       "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
       "subtitle_sha256": "4b4bb7cb4407504dec608add442cc1e6317d8bfc969a54a3631e3e453e219190",
-      "peak_rss_bytes": 355336192
+      "peak_rss_bytes": 353878016
     },
     {
       "tool": "yt-dlp",
@@ -241,21 +241,21 @@
         "--cookies",
         "<temporary-cookie-copy>",
         "--cache-dir",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/cache",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/cache",
         "-P",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/03-yt-dlp",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/03-yt-dlp",
         "-o",
         "%(id)s.%(ext)s",
         "--",
         "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
       ],
-      "wall_s": 9.200449458999998,
+      "wall_s": 20.744784582999998,
       "returncode": 0,
       "caption_bytes": 214399,
       "words": 2009,
       "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
       "subtitle_sha256": "4b4bb7cb4407504dec608add442cc1e6317d8bfc969a54a3631e3e453e219190",
-      "peak_rss_bytes": 358350848
+      "peak_rss_bytes": 355188736
     },
     {
       "tool": "yt-dlp-explode",
@@ -275,21 +275,21 @@
         "--cookies",
         "<temporary-cookie-copy>",
         "--cache-dir",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/cache",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/cache",
         "-P",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/03-yt-dlp-explode",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/03-yt-dlp-explode",
         "-o",
         "%(id)s.%(ext)s",
         "--",
         "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
       ],
-      "wall_s": 5.860316417000007,
+      "wall_s": 1.8672075000000063,
       "returncode": 0,
       "caption_bytes": 214399,
       "words": 2009,
       "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
       "subtitle_sha256": "4b4bb7cb4407504dec608add442cc1e6317d8bfc969a54a3631e3e453e219190",
-      "peak_rss_bytes": 41451520
+      "peak_rss_bytes": 39223296
     },
     {
       "tool": "yt-dlp-explode",
@@ -309,21 +309,21 @@
         "--cookies",
         "<temporary-cookie-copy>",
         "--cache-dir",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/cache",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/cache",
         "-P",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/04-yt-dlp-explode",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/04-yt-dlp-explode",
         "-o",
         "%(id)s.%(ext)s",
         "--",
         "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
       ],
-      "wall_s": 1.7384515840000034,
+      "wall_s": 4.603706415999994,
       "returncode": 0,
       "caption_bytes": 214399,
       "words": 2009,
       "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
       "subtitle_sha256": "4b4bb7cb4407504dec608add442cc1e6317d8bfc969a54a3631e3e453e219190",
-      "peak_rss_bytes": 41517056
+      "peak_rss_bytes": 39026688
     },
     {
       "tool": "yt-dlp",
@@ -343,21 +343,21 @@
         "--cookies",
         "<temporary-cookie-copy>",
         "--cache-dir",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/cache",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/cache",
         "-P",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/04-yt-dlp",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/04-yt-dlp",
         "-o",
         "%(id)s.%(ext)s",
         "--",
         "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
       ],
-      "wall_s": 14.476658208000003,
+      "wall_s": 25.25747637500001,
       "returncode": 0,
       "caption_bytes": 214399,
       "words": 2009,
       "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
       "subtitle_sha256": "4b4bb7cb4407504dec608add442cc1e6317d8bfc969a54a3631e3e453e219190",
-      "peak_rss_bytes": 355680256
+      "peak_rss_bytes": 355991552
     },
     {
       "tool": "yt-dlp",
@@ -377,21 +377,21 @@
         "--cookies",
         "<temporary-cookie-copy>",
         "--cache-dir",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/cache",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/cache",
         "-P",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/05-yt-dlp",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/05-yt-dlp",
         "-o",
         "%(id)s.%(ext)s",
         "--",
         "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
       ],
-      "wall_s": 15.11799141600001,
+      "wall_s": 15.607787374999987,
       "returncode": 0,
       "caption_bytes": 214399,
       "words": 2009,
       "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
       "subtitle_sha256": "4b4bb7cb4407504dec608add442cc1e6317d8bfc969a54a3631e3e453e219190",
-      "peak_rss_bytes": 357203968
+      "peak_rss_bytes": 359251968
     },
     {
       "tool": "yt-dlp-explode",
@@ -411,43 +411,43 @@
         "--cookies",
         "<temporary-cookie-copy>",
         "--cache-dir",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/cache",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/cache",
         "-P",
-        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli-final/05-yt-dlp-explode",
+        "/Users/meoyawn/Developer/yt-dlp-explode/artifacts/benchmarks/direct-cli/05-yt-dlp-explode",
         "-o",
         "%(id)s.%(ext)s",
         "--",
         "https://www.youtube.com/watch?v=4Ff0xc9M8kA"
       ],
-      "wall_s": 1.6537384170000138,
+      "wall_s": 7.390623125000019,
       "returncode": 0,
       "caption_bytes": 214399,
       "words": 2009,
       "normalized_sha256": "a527b16255a497639aa65d6b0a9656a161327d1c8e45aec8defd6faea240bc3a",
       "subtitle_sha256": "4b4bb7cb4407504dec608add442cc1e6317d8bfc969a54a3631e3e453e219190",
-      "peak_rss_bytes": 41975808
+      "peak_rss_bytes": 39911424
     }
   ],
   "summary": {
     "yt-dlp-explode": {
       "successes": 5,
       "attempts": 5,
-      "median_wall_s": 1.8387423750000025,
-      "min_wall_s": 1.6537384170000138,
-      "max_wall_s": 5.860316417000007,
-      "median_peak_rss_bytes": 41615360
+      "median_wall_s": 4.603706415999994,
+      "min_wall_s": 1.8672075000000063,
+      "max_wall_s": 7.390623125000019,
+      "median_peak_rss_bytes": 39223296
     },
     "yt-dlp": {
       "successes": 5,
       "attempts": 5,
-      "median_wall_s": 14.476658208000003,
-      "min_wall_s": 9.200449458999998,
-      "max_wall_s": 18.238807959,
-      "median_peak_rss_bytes": 355713024
+      "median_wall_s": 19.956225042,
+      "min_wall_s": 12.212033166000012,
+      "max_wall_s": 25.25747637500001,
+      "median_peak_rss_bytes": 355434496
     }
   },
   "matching_transcripts": true,
   "executables_unchanged": true,
-  "speed_ratio": 7.8731302464272535,
-  "target_met": true
+  "speed_ratio": 4.334817044945123,
+  "target_met": false
 }

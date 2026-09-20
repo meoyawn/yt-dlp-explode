@@ -1,0 +1,66 @@
+[
+  {
+    "network_framework": true,
+    "wall_s": 6.617713583,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 6.1678,
+    "System.Net.Sockets.Connect_ms": 2.4084000000000003,
+    "System.Net.Security.Handshake_ms": 4453.454
+  },
+  {
+    "network_framework": false,
+    "wall_s": 4.258846959000001,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 5.403599999999997,
+    "System.Net.Sockets.Connect_ms": 4.784499999999994,
+    "System.Net.Security.Handshake_ms": 3117.0095
+  },
+  {
+    "network_framework": true,
+    "wall_s": 1.7253455000000013,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 5.3774000000000015,
+    "System.Net.Sockets.Connect_ms": 1.4080000000000013,
+    "System.Net.Security.Handshake_ms": 628.6956
+  },
+  {
+    "network_framework": false,
+    "wall_s": 1.9988561249999997,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 16.175000000000004,
+    "System.Net.Sockets.Connect_ms": 1.9590000000000032,
+    "System.Net.Security.Handshake_ms": 835.59
+  },
+  {
+    "network_framework": true,
+    "wall_s": 4.435818125000001,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 3.0716000000000037,
+    "System.Net.Sockets.Connect_ms": 9.017000000000003,
+    "System.Net.Security.Handshake_ms": 3170.7835999999998
+  },
+  {
+    "network_framework": false,
+    "wall_s": 2.147878417000001,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 5.199600000000004,
+    "System.Net.Sockets.Connect_ms": 2.8297999999999988,
+    "System.Net.Security.Handshake_ms": 928.3013
+  },
+  {
+    "network_framework": true,
+    "wall_s": 1.7031392089999997,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 6.2524000000000015,
+    "System.Net.Sockets.Connect_ms": 10.222000000000001,
+    "System.Net.Security.Handshake_ms": 603.2436
+  },
+  {
+    "network_framework": false,
+    "wall_s": 1.7542118329999994,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 4.170099999999998,
+    "System.Net.Sockets.Connect_ms": 3.2117000000000004,
+    "System.Net.Security.Handshake_ms": 735.2593
+  }
+]

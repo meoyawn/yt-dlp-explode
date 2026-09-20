@@ -1,0 +1,92 @@
+[
+  {
+    "new_transport": true,
+    "wall_s": 12.674200416,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 17.278099999999995,
+    "System.Net.Sockets.Connect_ms": 3.4863,
+    "System.Net.Security.Handshake_ms": 10975.2855,
+    "first_request": "http_headers /embed/4Ff0xc9M8kA HTTP/2.0"
+  },
+  {
+    "new_transport": false,
+    "wall_s": 2.2789828340000007,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 4.9923,
+    "System.Net.Sockets.Connect_ms": 10.26339999999999,
+    "System.Net.Security.Handshake_ms": 1139.6241,
+    "first_request": "http_headers /embed/4Ff0xc9M8kA"
+  },
+  {
+    "new_transport": true,
+    "wall_s": 2.735686750000003,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 8.612100000000005,
+    "System.Net.Sockets.Connect_ms": 1.5003000000000029,
+    "System.Net.Security.Handshake_ms": 1475.5404,
+    "first_request": "http_headers /embed/4Ff0xc9M8kA HTTP/2.0"
+  },
+  {
+    "new_transport": false,
+    "wall_s": 1.894447459000002,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 3.3400999999999996,
+    "System.Net.Sockets.Connect_ms": 2.0026999999999973,
+    "System.Net.Security.Handshake_ms": 810.3674,
+    "first_request": "http_headers /embed/4Ff0xc9M8kA"
+  },
+  {
+    "new_transport": true,
+    "wall_s": 1.7079379579999987,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 7.623900000000006,
+    "System.Net.Sockets.Connect_ms": 2.9554999999999936,
+    "System.Net.Security.Handshake_ms": 602.6610999999999,
+    "first_request": "http_headers /embed/4Ff0xc9M8kA HTTP/2.0"
+  },
+  {
+    "new_transport": false,
+    "wall_s": 1.6804480839999982,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 3.188900000000004,
+    "System.Net.Sockets.Connect_ms": 4.034700000000001,
+    "System.Net.Security.Handshake_ms": 694.983,
+    "first_request": "http_headers /embed/4Ff0xc9M8kA"
+  },
+  {
+    "new_transport": true,
+    "wall_s": 2.3509309579999993,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 6.1629000000000005,
+    "System.Net.Sockets.Connect_ms": 10.913999999999994,
+    "System.Net.Security.Handshake_ms": 1259.6457,
+    "first_request": "http_headers /embed/4Ff0xc9M8kA HTTP/2.0"
+  },
+  {
+    "new_transport": false,
+    "wall_s": 2.074569834000002,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 4.287799999999997,
+    "System.Net.Sockets.Connect_ms": 2.6037000000000035,
+    "System.Net.Security.Handshake_ms": 963.4993999999999,
+    "first_request": "http_headers /embed/4Ff0xc9M8kA"
+  },
+  {
+    "new_transport": true,
+    "wall_s": 1.7433672089999988,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 2.720799999999997,
+    "System.Net.Sockets.Connect_ms": 2.451999999999998,
+    "System.Net.Security.Handshake_ms": 626.6726,
+    "first_request": "http_headers /embed/4Ff0xc9M8kA HTTP/2.0"
+  },
+  {
+    "new_transport": false,
+    "wall_s": 1.8928192920000058,
+    "returncode": 0,
+    "System.Net.NameResolution.Resolution_ms": 3.2881,
+    "System.Net.Sockets.Connect_ms": 6.681200000000004,
+    "System.Net.Security.Handshake_ms": 792.5092999999999,
+    "first_request": "http_headers /embed/4Ff0xc9M8kA"
+  }
+]
