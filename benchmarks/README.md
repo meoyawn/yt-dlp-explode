@@ -1,5 +1,7 @@
 # Caption compatibility benchmark
 
+See [measured results](RESULTS.md) for the five-run comparison.
+
 Runs the user's existing transcript script unchanged, comparing installed yt-dlp
 with the native `yt-dlp-explode` binary behind the same `yt-dlp` command name.
 The script's metadata flags, language selection, JSON3 fetch, parsing, and output

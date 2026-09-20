@@ -112,6 +112,10 @@ Native AOT, workstation GC, HTTP compression, and reuse of the caption-only
 library path keep startup and memory overhead low. See [benchmarks](benchmarks/README.md).
 The library buffers responses and caption metadata; this is not a streaming API.
 
+The unchanged transcript script succeeded 5/5 with matching text: 4.835 s median
+using this executable versus 18.579 s using yt-dlp. A direct native subtitle
+download used 39.3 MiB peak RSS. See [measurement details](benchmarks/RESULTS.md).
+
 ## Library dependency
 
 The Git submodule at `external/YoutubeExplode` uses **meoyawn's fork**, pinned to
