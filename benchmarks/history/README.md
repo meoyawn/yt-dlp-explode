@@ -14,5 +14,7 @@ without rewriting its commands or executable hashes.
 
 - cache-only-results.json: first direct CLI trial; cache alone did not meet the
   2.276 s target (4.604 s median).
+- NATIVE-FINAL.md and native-final-results.json: the 2026-09-20 direct C#/yt-dlp
+  comparison before the Bun implementation (1.839 s native median).
 
 Use ../README.md to benchmark the current compatibility-oriented executable.

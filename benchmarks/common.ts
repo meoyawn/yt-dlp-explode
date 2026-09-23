@@ -9,6 +9,7 @@ export interface Options {
   cookies: string;
   binary: string;
   ytDlp: string;
+  bunBinary?: string;
   url: string;
   runs: number;
   output: string;
@@ -73,6 +74,7 @@ export async function readOptions(mode: "direct" | "script"): Promise<Options | 
         output: { type: "string" },
         help: { type: "boolean", short: "h" },
         "yt-dlp": { type: "string" },
+        "bun-binary": { type: "string" },
         "cold-cache": { type: "boolean" },
         "max-median": { type: "string" },
         script: { type: "string" },
@@ -80,7 +82,7 @@ export async function readOptions(mode: "direct" | "script"): Promise<Options | 
       strict: true,
       allowPositionals: false,
     }));
-    for (const option of mode === "direct" ? ["script"] as const : ["yt-dlp", "cold-cache", "max-median"] as const) {
+    for (const option of mode === "direct" ? ["script"] as const : ["yt-dlp", "bun-binary", "cold-cache", "max-median"] as const) {
       if (values[option] !== undefined) throw new Error(`Unknown option --${option}`);
     }
     if (values.help) {
@@ -90,7 +92,8 @@ export async function readOptions(mode: "direct" | "script"): Promise<Options | 
   --runs COUNT      Measured runs per tool (default: 5), plus one excluded warmup
   --output DIR      New output directory (default: artifacts/benchmarks/TIMESTAMP)
 ${mode === "direct" ? `  --yt-dlp FILE     Baseline executable (default: yt-dlp on PATH)
-  --cold-cache      Disable both tools' disk caches for every invocation
+  --bun-binary FILE Include the compiled Bun CLI as a third implementation
+  --cold-cache      Disable all tools' disk caches for every invocation
   --max-median SEC  Fail if the native median exceeds this many seconds` : "  --script FILE     Unchanged transcript script; baseline yt-dlp must be on PATH"}`);
       return;
     }
@@ -114,6 +117,7 @@ ${mode === "direct" ? `  --yt-dlp FILE     Baseline executable (default: yt-dlp 
     cookies: await realpath(absolutePath(values.cookies!)),
     binary: absolutePath(values.binary),
     ytDlp: absolutePath(values["yt-dlp"] ?? Bun.which("yt-dlp")!),
+    bunBinary: values["bun-binary"] ? absolutePath(values["bun-binary"]) : undefined,
     url: values.url,
     runs: Number(values.runs),
     output,

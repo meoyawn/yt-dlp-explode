@@ -1,92 +1,84 @@
-# Direct CLI benchmark — 2026-09-20
+# Direct CLI benchmark — 2026-09-23
 
-**The ≤2.276 s median target is met: 1.839 s.**
-Both CLIs succeeded in **5/5** measured attempts on
-[4Ff0xc9M8kA](https://www.youtube.com/watch?v=4Ff0xc9M8kA), downloading English
-JSON3 subtitles. All normalized text hashes match (2,009 words). Tool caches
-were warmed by one excluded invocation; captions were downloaded afresh each
-time. No Node script, wrapper CLI, or alternate yt-dlp environment was used.
+The Bun implementation completed **5/5** measured downloads with a **0.885 s
+median**. C#, Bun, and the installed yt-dlp all downloaded identical normalized
+English JSON3 transcripts (2,009 words) for
+[4Ff0xc9M8kA](https://www.youtube.com/watch?v=4Ff0xc9M8kA).
 
 | CLI | Success | Median wall time | Range | Median peak RSS |
 | --- | ---: | ---: | ---: | ---: |
-| yt-dlp-explode 0.1.1 Native AOT | 5/5 | 1.839 s | 1.654–5.860 s | 39.7 MiB |
-| Local yt-dlp 2026.08.19 | 5/5 | 14.477 s | 9.200–18.239 s | 339.2 MiB |
+| yt-dlp-explode 0.1.1 Native AOT | 5/5 | 0.928 s | 0.909–1.001 s | 40.1 MiB |
+| yt-dlp-explode 0.1.1 Bun / YouTube.js 18.1.0 | 5/5 | 0.885 s | 0.864–1.039 s | 73.5 MiB |
+| Local yt-dlp 2026.08.19 | 5/5 | 4.724 s | 4.572–4.765 s | 337.7 MiB |
 
-The median ratio is **7.87×**. The native median is
-19.2% below the requested limit. This is a measured
-median, not a maximum-latency guarantee: the 5.860 s native
-outlier remains included.
+Bun's median was **5.34× faster than installed yt-dlp** and about **4.7% lower
+than C#** in this run. The small Bun/C# difference is not evidence of a stable
+performance advantage; these are five network-dependent observations. Bun's
+median peak RSS was 1.84× C#'s. Its standalone executable was 67,774,962 bytes
+(64.64 MiB), versus C#'s 7,954,208 bytes (7.59 MiB). Bun embeds its runtime.
 
-| Attempt | yt-dlp-explode seconds | yt-dlp seconds |
-| --- | ---: | ---: |
-| 1 | 1.839 | 18.239 |
-| 2 | 2.093 | 10.937 |
-| 3 | 5.860 | 9.200 |
-| 4 | 1.738 | 14.477 |
-| 5 | 1.654 | 15.118 |
-
-## What changed
-
-- Corrected the benchmark boundary: complete CLI subtitle downloads for both
-  tools. The old 4.835 s measurement included the separate Node workflow and
-  its extra caption connection; it was not comparable to the original 2.276 s
-  native CLI measurement.
-- Cached public, versioned player scripts using server freshness, checksums,
-  bounded storage, and atomic writes. Warm pulls use three network requests;
-  authenticated bootstrap metadata and captions remain fresh.
-- Preferred HTTP/2 with HTTP/1.1 fallback, and opted into .NET 10's supported
-  macOS TLS 1.3 backend. Profiling isolated long outliers in TLS setup. Network
-  spikes remain possible; no extra caption retries were added.
-
-[PROFILE.md](PROFILE.md) contains timings, evidence, diagnostic commands, and
-all exploratory transport results. The [cache-only release trial](history/cache-only-results.json)
-missed the target at 4.604 s and is preserved. The older
-[script comparison](history/SCRIPT-RESULTS.md) is also retained.
+| Attempt | C# seconds | Bun seconds | yt-dlp seconds |
+| --- | ---: | ---: | ---: |
+| 1 | 0.999 | 0.885 | 4.706 |
+| 2 | 0.909 | 1.010 | 4.572 |
+| 3 | 1.001 | 0.880 | 4.760 |
+| 4 | 0.928 | 1.039 | 4.765 |
+| 5 | 0.927 | 0.864 | 4.724 |
 
 ## Environment and method
 
-Apple M1 Pro, macOS 26.4 ARM64; .NET SDK 10.0.401, Native AOT Release.
-Executable: 7,954,208 bytes (7.59 MiB).
-YoutubeExplode dependency remains pinned to
-[`dd8598c`](https://github.com/meoyawn/YoutubeExplode/commit/dd8598cabd87984e23a78f91bd99189240bccca3).
+Apple M1 Pro, macOS 26.4 ARM64 (Darwin 25.4.0). C# was rebuilt from the current
+source using .NET SDK 10.0.401, Native AOT Release, and the pinned YoutubeExplode
+submodule. Bun 1.4.2 compiled the new TypeScript CLI with YouTube.js 18.1.0,
+ESM bytecode, minification, embedded sourcemaps, and preserved function names.
+The baseline was `/Users/meoyawn/.local/bin/yt-dlp`, version 2026.08.19, as
+installed. Every executable's version and SHA-256 stayed unchanged throughout
+the series.
 
-Baseline: `/Users/meoyawn/.local/bin/yt-dlp`, version 2026.08.19,
-used as installed. The earlier 2026.07.04/curl_cffi installation aborted during
-an exploratory direct download; the user's local install changed to 2026.08.19
-before this comparison and all its measured attempts succeeded. No isolated
-replacement was used. Both executables' versions and hashes were stable across
-the final series.
+All tools used normal yt-dlp config discovery, including the configured
+`youtube:player_client=web_embedded`. Each received identical subtitle/action
+flags, a fresh output directory, and an independent private copy of the cookie
+jar. Copies were removed after each call; the original jar was never passed to
+the measured CLIs. No alternative yt-dlp install or transcript-script wrapper
+was used.
 
-Normal yt-dlp config discovery remained enabled, including the user's existing
-`youtube:player_client=web_embedded` and cookie configuration. Both received
-identical subtitle flags, a fresh output directory, an independent cookie-file
-copy, and the same initially empty cache directory. Cookie copies were removed
-after each run; the original jar was not modified.
+One excluded warmup per tool began with an empty shared cache directory, with
+independent namespaces for each implementation. Warmups took 1.224 s C#,
+1.213 s Bun, and 6.371 s yt-dlp. Five measured iterations alternated forward and
+reverse tool order with two-second pauses outside timing. Public player-script
+caches remained warm; caption responses and authenticated metadata were fetched
+afresh. OS/DNS caches remained warm. No builds or tests ran during measurement.
 
-The excluded cache-empty warmups took 5.399 s native and
-12.824 s yt-dlp. The headline numbers describe subsequent
-warm-cache pulls, not first use. Five measured runs alternated order with
-two-second pauses outside timing. No builds or tests ran during the measurement.
-Profiling was disabled. OS/DNS caches remained warm and the machine's existing
-tunnel route remained active.
+Wall time includes startup, config and cookie loading, discovery, caption
+download, file output, cookie save, and exit. Build, copying cookies, validation,
+and pauses are excluded. Peak RSS is macOS `/usr/bin/time -l` child accounting.
+Profiling was disabled. No median threshold was supplied for this comparison.
 
-Wall time includes startup, config/cookie load, extraction, subtitle download
-and file writing, cookie save, and exit. Build time, copying cookies, validation,
-and pauses are excluded. RSS uses macOS `time -l` child resource accounting,
-not summed concurrent process-tree memory.
-
-[results.json](results.json) records every command, timing, executable hash,
-output hash, and threshold outcome. Raw artifacts are in local ignored
-`artifacts/benchmarks/direct-cli-final/`. See [reproduction instructions](README.md).
+[results.json](results.json) contains all commands, attempts, output hashes,
+executable hashes/sizes, and summaries. Raw local artifacts are under ignored
+`artifacts/benchmarks/bun-comparison-20260923-full/`.
+See [reproduction instructions](README.md).
 
 ## Validation
 
-116 offline config/cookie/subtitle/cache assertions and eight native executable
-smoke checks passed. Live pulls matched the same transcript in every measured
-attempt. The upstream library PR #970 remains open and unchanged; all CLI
-optimizations live in this separate repository.
+The Bun implementation passed 13 offline tests with 140 assertions covering
+config, cookies, concurrent saves, HTTP redirects/authentication/timeouts,
+player-script caching, JSON/selection, and complete CLI output workflows.
+Both TypeScript projects typechecked. The compiled Bun binary passed the
+existing eight executable smoke checks. The benchmark fixture suite also
+passed with the optional third implementation, and live anonymous subtitle
+listing succeeded separately.
 
-[Native AOT CI](https://github.com/meoyawn/yt-dlp-explode/actions/runs/35528400527)
-passed on all five targets: macOS ARM64/x64, Linux ARM64/x64, and Windows x64.
-Each built the native executable, ran compatibility and native smoke checks,
-and packaged the executable and documentation.
+CI is configured to build, test, smoke-test, and package Bun executables on
+macOS ARM64/x64, Linux ARM64/x64, and Windows x64; those CI jobs have not been
+run as part of this local measurement.
+
+## Previous measurements
+
+The [2026-09-20 C#/yt-dlp report](history/NATIVE-FINAL.md) and its
+[raw measurements](history/native-final-results.json) are retained. They measured
+1.839 s C# and 14.477 s yt-dlp. Network conditions differ between sessions;
+compare the three implementations using the same-session table above.
+The [profiling investigation](PROFILE.md),
+[cache-only trial](history/cache-only-results.json), and
+[historical script comparison](history/SCRIPT-RESULTS.md) remain available.

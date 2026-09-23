@@ -1,20 +1,27 @@
 # Direct CLI benchmark
 
 See [measured results](RESULTS.md) and the [profiling investigation](PROFILE.md).
-The current benchmark invokes **both CLIs directly**, with the same flags, to
+The current benchmark invokes **each CLI directly**, with the same flags, to
 write English JSON3 subtitles. It does not invoke Node or the transcript script.
 
 ```sh
 pkgx dotnet publish src/yt-dlp-explode.csproj \
   -c Release -r osx-arm64 -o artifacts/osx-arm64
+bun install --cwd bun --frozen-lockfile
+bun run --cwd bun build
 
 bun benchmarks/benchmark.ts \
   --yt-dlp /Users/meoyawn/.local/bin/yt-dlp \
+  --bun-binary bun/artifacts/darwin-arm64/yt-dlp-explode \
   --cookies /Users/meoyawn/.yt-dlp/cookies.txt \
-  --runs 5 --max-median 2.276
+  --runs 5
 ```
 
-The selected installed yt-dlp executable runs as-is. Both use normal config
+`--bun-binary` adds the compiled [Bun implementation](../bun/README.md) to the
+C#/yt-dlp comparison. Omit it to retain the original two-tool benchmark.
+On other platforms, use the corresponding Bun artifact directory.
+
+The selected installed yt-dlp executable runs as-is. All use normal config
 lookup, including `~/.yt-dlp/config.txt`; the measurement used its configured
 `youtube:player_client=web_embedded`. The benchmark does not add `default` to
 that selection. Each call overrides only the shared action/output options,
@@ -29,7 +36,7 @@ TOOL --skip-download --write-auto-subs --sub-langs en --sub-format json3 \
 One excluded warmup for each tool starts with an empty cache directory. Five
 measured runs alternate order, with two-second pauses outside timing. Tool
 caches persist after warmup; subtitles always go into fresh directories and
-are downloaded on every run. Use `--cold-cache` to disable both disk caches.
+are downloaded on every run. Use `--cold-cache` to disable all disk caches.
 OS/DNS caches remain warm. The user's original cookie file remains unchanged.
 
 Timing includes process startup, config/cookie load, caption discovery, subtitle
@@ -40,7 +47,8 @@ the child process's peak RSS; no Node wrapper is involved.
 Success requires five successful, nonempty subtitle files from each tool and
 matching normalized text hashes. Errors are recorded as failures and never
 counted as fast pulls. `--max-median` additionally requires the native median
-not to exceed the given time. Executable versions/hashes are checked before
+not to exceed the given time; it still applies only to the C# implementation.
+Executable versions/hashes are checked before
 and after the series to catch concurrent updates. Full reports and logs stay
 under ignored `artifacts/benchmarks/`; reviewed reports are copied here.
 

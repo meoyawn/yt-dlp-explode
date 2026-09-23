@@ -1,0 +1,35 @@
+Usage: yt-dlp-explode [OPTIONS] URL [URL...]
+
+Bun CLI targeting yt-dlp compatibility. Current milestone: YouTube captions.
+
+  --skip-download              Retrieve metadata/subtitles without media
+  -J, --dump-single-json       Print caption metadata JSON; implies simulation
+  -j, --dump-json              Print one JSON object per video
+  --list-subs                  List manual and automatic subtitle tracks
+  --write-subs                 Write manual subtitles
+  --write-auto-subs            Write automatic subtitles
+  --sub-langs LANGS            Comma-separated codes/regex, all, and -exclusions
+  --sub-format FORMAT          Format preference, e.g. json3/vtt/best
+  -o, --output TEMPLATE        yt-dlp filename template, optionally subtitle:...
+  -P, --paths PATH             Output directory, optionally home:/subtitle:
+  --cookies FILE              Read AND save a Netscape cookie jar
+  --no-cookies                Disable cookie-file load/save
+  --cache-dir DIR             Cache public player scripts (yt-dlp cache location)
+  --no-cache-dir              Disable reading and writing that cache
+  --config-locations PATH      Additional config file/directory; repeatable
+  --ignore-config             Disable automatic config discovery
+  -s, --simulate               Retrieve metadata without writing subtitles
+  --no-simulate               Allow writes with JSON/listing options
+  --no-playlist               Handle the video in a video/playlist URL
+  --force-overwrites          Replace existing subtitle files
+  -q, --quiet                 Suppress progress messages
+  --no-warnings               Suppress warnings
+  -v, --verbose               Report loaded config paths and request counts
+  --socket-timeout SECONDS    HTTP timeout (default: 60)
+  --stats                     Additional timing/request JSON on stderr
+  --version                   Print version
+  -h, --help                  Show this help
+
+Reads yt-dlp's portable, home, user, and system config locations.
+Full compatibility is the project goal. Media downloading and other
+extractors are not implemented; see COMPATIBILITY.md for the current scope.

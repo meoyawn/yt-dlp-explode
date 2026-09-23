@@ -9,6 +9,10 @@ and the caption metadata consumed by existing transcript scripts.
 This is an early implementation, not full yt-dlp parity yet. See
 [COMPATIBILITY.md](COMPATIBILITY.md) for supported behavior and remaining work.
 
+A [Bun implementation](bun/README.md) in `bun/` clones the current cookie and
+caption CLI surface using YouTube.js and compiles to a standalone executable.
+See the [benchmark comparison](benchmarks/RESULTS.md) for measured results.
+
 ## Usage
 
 The familiar yt-dlp arguments are the interface:
@@ -120,11 +124,11 @@ and reuse of the caption-only library path keep startup and memory overhead low.
 On macOS, the CLI opts into .NET 10's TLS 1.3-capable Network.framework backend. See [benchmarks](benchmarks/README.md).
 The library buffers responses and caption metadata; this is not a streaming API.
 
-Direct CLI subtitle downloads succeeded **5/5** with matching text:
-**1.839 s median** for this executable versus **14.477 s** for the
-user's local yt-dlp 2026.08.19, using warmed tool caches and fresh captions.
-Native median peak RSS was **39.7 MiB**. The requested ≤2.276 s median is met;
-network outliers still occur. See [measurement details](benchmarks/RESULTS.md)
+The latest direct CLI comparison succeeded **5/5** for every implementation
+with matching text: **0.928 s median C#**, **0.885 s Bun**, and **4.724 s** for
+the user's local yt-dlp 2026.08.19, using warmed tool caches and fresh captions.
+Median peak RSS was **40.1 MiB C#** and **73.5 MiB Bun**. Network conditions
+affect timings. See [measurement details](benchmarks/RESULTS.md)
 and [profiling](benchmarks/PROFILE.md).
 
 ## Library dependency
@@ -144,12 +148,14 @@ with `bun install`.
 
 ```sh
 bun run typecheck
-bun test
+bun test scripts benchmarks
 pkgx dotnet run --project tests/CompatibilityTests.csproj -c Release
 bun scripts/smoke-test.ts artifacts/osx-arm64/yt-dlp-explode
 ```
 
 These checks use synthetic config and cookie files; they do not require YouTube
 or a real account. Live script compatibility is measured separately.
+The Bun implementation has its own locked dependencies and validation commands
+in [bun/README.md](bun/README.md).
 
 MIT; see [LICENSE](LICENSE) and [YoutubeExplode's license](external/YoutubeExplode/License.txt).

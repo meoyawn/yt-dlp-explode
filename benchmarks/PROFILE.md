@@ -39,8 +39,8 @@ alone did not eliminate network spikes. The subsequent [HTTP/2 experiment](profi
 confirmed HTTP/2 negotiation and roughly 0.60–0.63 s TLS handshakes in its fast
 runs versus 0.69–0.96 s in the old transport's fast runs. However, new-transport
 outliers made its full exploratory median worse (2.351 s versus 1.894 s).
-This is not evidence that transport changes remove tail latency; the final
-release is measured independently below.
+This is not evidence that transport changes remove tail latency; the original
+release measurement is preserved in [history/NATIVE-FINAL.md](history/NATIVE-FINAL.md).
 
 ## Avoidable player-script download
 
@@ -64,8 +64,9 @@ separate `yt-dlp-explode-player-v1` namespace.
 Caching alone was insufficient: the [first release benchmark](history/cache-only-results.json)
 succeeded 5/5 but measured **4.604 s** native median versus **19.956 s** local
 yt-dlp median, missing the target. That failed timing result is retained rather
-than discarded. See [RESULTS.md](RESULTS.md) for the final transport change's
-measurements.
+than discarded. See [history/NATIVE-FINAL.md](history/NATIVE-FINAL.md) for the
+final transport change's measurements and [RESULTS.md](RESULTS.md) for the
+subsequent C#/Bun/yt-dlp comparison.
 
 ## Reproduce profiling
 

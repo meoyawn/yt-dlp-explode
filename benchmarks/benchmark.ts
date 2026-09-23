@@ -55,6 +55,7 @@ async function main() {
   const args = await readOptions("direct");
   if (!args) return 0;
   const variants: [string, string][] = [["yt-dlp-explode", args.binary], ["yt-dlp", args.ytDlp]];
+  if (args.bunBinary) variants.push(["yt-dlp-explode-bun", args.bunBinary]);
   const versions: Record<string, string> = {};
   const hashes: Record<string, string> = {};
   for (const [name, binary] of variants) {
@@ -65,8 +66,9 @@ async function main() {
     date_utc: new Date().toISOString(), platform: platform(), video_url: args.url,
     executables: Object.fromEntries(variants), versions, executable_sha256: hashes,
     binary_bytes: Bun.file(args.binary).size, max_median_s: args.maxMedian,
+    executable_bytes: Object.fromEntries(variants.map(([name, binary]) => [name, Bun.file(binary).size])),
     method: "Direct CLIs, identical flags, normal user config discovery, fresh process/output/cookie copy each run. One excluded warmup starting with an empty tool cache, alternating order, two-second pauses outside timing. Wall includes process startup, extraction, subtitle download/write and cookie save. Build, cookie copying and output validation excluded. macOS time -l measures child peak RSS.",
-    cache_policy: args.coldCache ? "disabled for both tools" : "same initially empty cache directory, reused after excluded warmup; no caption cache",
+    cache_policy: args.coldCache ? "disabled for all tools" : "same initially empty cache directory, reused after excluded warmup; no caption cache",
     runs: [] as Run[],
   };
   await collectRuns(args, report, variants, runOne);

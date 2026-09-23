@@ -1,0 +1,62 @@
+name: Bun executable
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: ${{ matrix.platform }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15
+            platform: darwin-arm64
+            binary: yt-dlp-explode
+          - runner: macos-15-intel
+            platform: darwin-x64
+            binary: yt-dlp-explode
+          - runner: ubuntu-22.04
+            platform: linux-x64
+            binary: yt-dlp-explode
+          - runner: ubuntu-24.04-arm
+            platform: linux-arm64
+            binary: yt-dlp-explode
+          - runner: windows-2022
+            platform: win32-x64
+            binary: yt-dlp-explode.exe
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.4.2
+      - name: Install Bun CLI dependencies
+        working-directory: bun
+        run: bun install --frozen-lockfile
+      - name: Typecheck
+        working-directory: bun
+        run: bun run typecheck
+      - name: Test compatibility
+        working-directory: bun
+        run: bun test
+      - name: Compile executable
+        working-directory: bun
+        run: bun run build
+      - name: Smoke-test executable
+        run: bun scripts/smoke-test.ts bun/artifacts/${{ matrix.platform }}/${{ matrix.binary }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: yt-dlp-explode-bun-${{ matrix.platform }}
+          path: bun/artifacts/${{ matrix.platform }}/${{ matrix.binary }}
+          if-no-files-found: error
+          retention-days: 30

@@ -7,7 +7,7 @@ import { normalizedText } from "./benchmark.ts";
 import { sha256, summarize, type Run, type Summary } from "./common.ts";
 
 const scenarios = [
-  { entry: "benchmark.ts", mode: "success", status: 0, maxMedian: "100" },
+  { entry: "benchmark.ts", mode: "success", status: 0, maxMedian: "100", includeBun: true },
   { entry: "benchmark.ts", mode: "mismatch", status: 1, maxMedian: "100" },
   { entry: "benchmark.ts", mode: "failure", status: 1, maxMedian: "100" },
   { entry: "benchmark.ts", mode: "success", status: 1, maxMedian: "0" },
@@ -55,7 +55,7 @@ describe("benchmark reports", () => {
       try {
         const cookie = join(root, "cookies.txt");
         await Bun.write(cookie, "original cookie contents\n");
-        for (const name of ["yt-dlp", "yt-dlp-explode"]) {
+        for (const name of ["yt-dlp", "yt-dlp-explode", ...(scenario.includeBun ? ["yt-dlp-explode-bun"] : [])]) {
           const executable = join(root, name);
           await copyFile(join(import.meta.dir, "fixtures", "caption-cli.ts"), executable);
           await chmod(executable, 0o700);
@@ -68,7 +68,8 @@ describe("benchmark reports", () => {
           "--cookies", cookie, "--binary", join(root, "yt-dlp-explode"), "--runs", "1", "--output", output,
           "--url", "https://example.invalid/watch?value=literal;data",
           ...(scenario.entry === "benchmark.ts"
-            ? ["--yt-dlp", join(root, "yt-dlp"), "--cold-cache", "--max-median", scenario.maxMedian]
+            ? ["--yt-dlp", join(root, "yt-dlp"), "--cold-cache", "--max-median", scenario.maxMedian,
+              ...(scenario.includeBun ? ["--bun-binary", join(root, "yt-dlp-explode-bun")] : [])]
             : ["--script", script]),
         ];
         const result = await $`${process.execPath} ${join(import.meta.dir, scenario.entry)} ${flags}`.env({
@@ -86,7 +87,9 @@ describe("benchmark reports", () => {
           executables_unchanged?: boolean;
         } = await Bun.file(join(output, "results.json")).json();
         expect(report.runs.map((run) => [run.tool, run.iteration, run.warmup])).toEqual([
-          ["yt-dlp-explode", 0, true], ["yt-dlp", 0, true], ["yt-dlp", 1, false], ["yt-dlp-explode", 1, false],
+          ["yt-dlp-explode", 0, true], ["yt-dlp", 0, true],
+          ...(scenario.includeBun ? [["yt-dlp-explode-bun", 0, true], ["yt-dlp-explode-bun", 1, false]] : []),
+          ["yt-dlp", 1, false], ["yt-dlp-explode", 1, false],
         ]);
         expect(report.matching_transcripts).toEqual(scenario.mode === "success");
         for (const summary of Object.values(report.summary)) {
