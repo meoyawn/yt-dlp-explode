@@ -5,11 +5,11 @@ median**. C#, Bun, and the installed yt-dlp all downloaded identical normalized
 English JSON3 transcripts (2,009 words) for
 [4Ff0xc9M8kA](https://www.youtube.com/watch?v=4Ff0xc9M8kA).
 
-| CLI | Success | Median wall time | Range | Median peak RSS |
-| --- | ---: | ---: | ---: | ---: |
-| yt-dlp-explode 0.1.1 Native AOT | 5/5 | 0.928 s | 0.909–1.001 s | 40.1 MiB |
-| yt-dlp-explode 0.1.1 Bun / YouTube.js 18.1.0 | 5/5 | 0.885 s | 0.864–1.039 s | 73.5 MiB |
-| Local yt-dlp 2026.08.19 | 5/5 | 4.724 s | 4.572–4.765 s | 337.7 MiB |
+| CLI | Success | Median wall time | Range | Median peak RSS | Standalone binary size |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| yt-dlp-explode 0.1.1 Native AOT | 5/5 | 0.928 s | 0.909–1.001 s | 40.1 MiB | 7.59 MiB |
+| yt-dlp-explode 0.1.1 Bun / YouTube.js 18.1.0 | 5/5 | 0.885 s | 0.864–1.039 s | 73.5 MiB | 64.64 MiB |
+| Local yt-dlp 2026.08.19 | 5/5 | 4.724 s | 4.572–4.765 s | 337.7 MiB | — |
 
 Bun's median was **5.34× faster than installed yt-dlp** and about **4.7% lower
 than C#** in this run. The small Bun/C# difference is not evidence of a stable
